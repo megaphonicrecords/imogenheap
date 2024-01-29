@@ -1,3 +1,5 @@
+![Imogen Heap](https://i.imgur.com/B3MR9gU.jpg)
+
 This is a simple [Next.js](https://nextjs.org/) project for Imogen Heap's website.
 
 ## Getting Started
