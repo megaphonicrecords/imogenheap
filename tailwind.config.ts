@@ -12,9 +12,21 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },  
+      boxShadow: {
+        'red': '0 4px 14px 0 rgba(255, 0, 0, 0.1)',
+        'blue': '0 4px 14px 0 rgba(0, 0, 255, 0.1)',
+        'green': '0 4px 14px 0 rgba(0, 255, 0, 0.1)',
+        // Add more colors as needed
       },
+    },
+  },
+  variants: {
+    extend: {
+      boxShadow: ['hover'],
     },
   },
   plugins: [],
 }
+
 export default config

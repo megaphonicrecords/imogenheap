@@ -1,112 +1,162 @@
 import Image from 'next/image'
+import { RxChevronRight } from "react-icons/rx";
+import Wordmark from './Wordmark.js';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <main className="flex min-h-screen flex-col items-center justify-between p-6 sm:p-12 md:p-24 lg:p-24">
+        <div className="md:mb-8 mb-6 lg:max-w-4xl lg:w-full">
+            <Wordmark style={{ width: '100%' }}/>
+  </div>
+  <div className="md:mb-8 mb-6 lg:max-w-4xl lg:w-full">
+            <Image 
+              src="/whydtm2.jpg"
+              alt="What Have You Done To Me promo image" 
+              className="rounded-lg inline-block" 
+              width={1792} 
+              height={1194} 
             />
-          </a>
-        </div>
-      </div>
+  </div>
+      <div className="mb-13 grid lg:max-w-4xl lg:w-full lg:mb-0 md:grid-cols-2 lg:grid-cols-3 text-left">
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
+          href="https://imogenheap.app"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(99,156,255,1)]"
           rel="noopener noreferrer"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/app-icon.png"
+              alt="Heapster App icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-blue-500">Heapster App</span>
+            <span className="text-blue-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Be part of the Heapster community.</b> Listen to Imogen&quot;s entire discography, unreleased songs, videos, and watch livestreams or chat with her directly in the app.
           </p>
         </a>
 
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
+          href="https://imogenheap.com/aimogen"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(211,247,178,1)]"
           rel="noopener noreferrer"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/aimogen-icon.png"
+              alt="AiMogen icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-lime-200">AiMogen</span>
+            <span className="text-lime-100 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Learn about Imogen’s ongoing AI project.</b> Talk to Augmented Imogen Heap, help contribute to the AImogen model, and see roadmap of its development.
           </p>
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
+          href="https://mimugloves.com"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(60,178,185,1)]"
           rel="noopener noreferrer"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/mimu-icon.png"
+              alt="MiMu icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-teal-400">MiMu Gloves</span>
+            <span className="text-teal-200 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Check out Imogen&quot;s magical gloves.</b> Music through movement. Learn about the world&quot;s most advanced and innovative wearable musical instrument.
           </p>
         </a>
 
         <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
+          href="https://prerelease.creativepassport.net"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(205,83,138,1)]"
           rel="noopener noreferrer"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/creativepassport-icon.png"
+              alt="The Creative Passport icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-pink-400">The Creative Passport</span>
+            <span className="text-pink-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Sign up to Imogen’s platform for digital identity.</b> A verified digital ID and data hub for musicmakers, services, and representatives.
           </p>
         </a>
+
+        <a
+          href="https://thehideaway.studio"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(232,218,197,1)]"
+          rel="noopener noreferrer"
+        >
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/hideaway-icon.png"
+              alt="The Hideaway Studio icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-orange-100">The Hideaway Studio</span>
+            <span className="text-orange-50 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
+            </span>
+          </h2>
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Explore the East London residential studio and production space.</b> Available for private bookings, studio hire, and creative retreats.
+          </p>
+        </a>
+
+        <a
+          href="https://megaphonicrecords.com"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(233,233,233,1)]"
+          rel="noopener noreferrer"
+        >
+          <h2 className="mb-3 text-sm font-semibold">
+            <Image 
+              src="/megaphonic-icon.png"
+              alt="Megaphonic Records icon" 
+              className="rounded-lg inline-block mr-2" 
+              width={30} 
+              height={30} 
+            />
+            <span className="text-warmGray-200">Megaphonic Records</span>
+            <span className="ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+              <RxChevronRight />
+            </span>
+          </h2>
+          <p className="m-0 max-w-[100ch] text-sm font-extralight">
+            <b>Discover Imogen’s independent music label.</b> Explore the catalogue, and connect with publishing, booking, and management team.
+          </p>
+        </a>
+
       </div>
     </main>
   )

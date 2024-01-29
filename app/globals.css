@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+{/*Colour Responsive
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,4 +25,38 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+*/}
+
+body {
+  color: rgb(255, 255, 255);
+  background: rgb(25, 25, 25)
+}
+
+.glowBox {
+  @apply 
+  rounded-lg 
+  border border-transparent 
+  px-5 py-4 
+  transition-colors 
+  hover:border-dotted hover:border-zinc-700;
+}
+
+.dotLink {
+  @apply
+  underline
+  underline-offset-4
+  decoration-dotted
+  decoration-zinc-600;
+}
+
+.wordmark {
+  fill: #757575;
+  transition: fill 10s;
+  transition-delay: 5s; 
+}
+
+.wordmark:hover {
+  fill: transparent;
+  transition: fill 0s;
 }
