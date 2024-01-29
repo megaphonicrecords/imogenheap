@@ -2,7 +2,7 @@
 
 This is a simple [Next.js](https://nextjs.org/) project for Imogen Heap's website.
 
-## Getting Started
+## Setup
 
 First, run the development server:
 
@@ -27,7 +27,7 @@ You can start editing the homepage by modifying `app/page.tsx`. The page auto-up
 - UI Library – [NextUI](https://nextui.org/docs/guide/introduction)
 - Icon Pack – [Radix](https://react-icons.github.io/react-icons/icons/rx/)
 
-## Deploy on Vercel
+## Deployment
 
 This app is deployed using [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
