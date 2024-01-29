@@ -30,7 +30,3 @@ You can start editing the homepage by modifying `app/page.tsx`. The page auto-up
 This app is deployed using [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 View the production deployment at [imogenheap.vercel.app](https://imogenheap.vercel.app/).
-
-## Development 
-
-This app uses 
