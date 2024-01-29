@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const Wordmark = (props) => (
+const wordmark = (props) => (
   <svg
     width="896px"
     height="173px"
@@ -351,4 +351,4 @@ const Wordmark = (props) => (
     </g>
   </svg>
 )
-export default Wordmark
+export default wordmark
