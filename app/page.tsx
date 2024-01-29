@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { RxChevronRight } from "react-icons/rx";
-import Wordmark from './Wordmark.js';
+import Wordmark from './wordmark.js';
 
 export default function Home() {
   return (
