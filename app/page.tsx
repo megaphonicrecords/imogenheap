@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { RxChevronRight } from "react-icons/rx";
 import Wordmark from './wordmark.js';
+import whydtm from '../public/whydtm2.jpg';
 
 export default function Home() {
   return (
@@ -10,9 +11,10 @@ export default function Home() {
   </div>
   <div className="md:mb-8 mb-6 lg:max-w-4xl lg:w-full">
             <Image 
-              src="/whydtm2.jpg"
+              src={whydtm}
+              placeholder="blur" 
               alt="What Have You Done To Me promo image" 
-              className="rounded-lg inline-block" 
+              className="rounded-lg inline-block animate-fadeIn" 
               width={1792} 
               height={1194} 
             />
