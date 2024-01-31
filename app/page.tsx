@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { RxChevronRight } from "react-icons/rx";
 import Wordmark from './wordmark.js';
-import whydtm from '../public/whydtm2.jpg';
+import whydtm from '../public/images/whydtm2.jpg';
 
 export default function Home() {
   return (
