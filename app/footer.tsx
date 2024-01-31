@@ -18,7 +18,7 @@ return (
     <a href="https://prerelease.creativepassport.net/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545" rel="noopener noreferrer" className="hover:text-white"><BsPassportFill /></a>
     </div>
     <div className="container mx-auto mt-4">
-        <a href="http://imogenheap.com/privacy" rel="noopener noreferrer" className="mr-4 text-sm font-extralight hover:font-normal dotLink">Privacy Policy</a>
+        <a href="http://imogenheap.com/policy" rel="noopener noreferrer" className="mr-4 text-sm font-extralight hover:font-normal dotLink">Privacy Policy</a>
         <a href="http://imogenheap.com/contact" rel="noopener noreferrer" className="text-sm font-extralight hover:font-normal dotLink">Contact</a>
     </div>
     <div className="container mx-auto mt-4">
