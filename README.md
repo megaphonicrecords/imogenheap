@@ -25,6 +25,7 @@ You can start editing the homepage by modifying `app/page.tsx`. The page auto-up
 - React Framework – [Next.js](https://nextjs.org/docs)
 - CSS Framework – [Tailwind](https://tailwindcss.com/docs/installation)
 - UI Library – [NextUI](https://nextui.org/docs/guide/introduction)
+- Animation Library –  [Framer Motion]([https://nextui.org/docs/guide/introduction](https://www.framer.com/motion/)
 - Icon Pack – [Radix](https://react-icons.github.io/react-icons/icons/rx/)
 
 ## Deployment
