@@ -28,7 +28,6 @@ export default function Home() {
             <Image
               src={whydtm2}
               placeholder="blur"
-              shadow="sm"
               radius="lg"
               className="w-full object-cover"
             />
