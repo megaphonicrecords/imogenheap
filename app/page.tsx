@@ -5,9 +5,16 @@ import {
   CardBody,
   CardFooter,
   Button,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
 } from "@nextui-org/react";
 
 import { RxChevronRight } from "react-icons/rx";
+import { HiOutlinePlay } from "react-icons/hi2";
+
 import Wordmark from "./wordmark.js";
 import whydtm2 from "../public/images/whydtm2.jpg";
 import whydtm from "../public/images/whydtm.jpg";
@@ -24,6 +31,25 @@ export default function Home() {
           shadow="sm"
           className="w-full col-span-12 sm:col-span-7 animate-fadeIn"
         >
+          <CardHeader className="text-small justify-between text-left p-5 font-extralight">
+            <h2 className="text-sm font-semibold">
+              <Image
+                src={whydtm}
+                alt="What Have You Done To Me cover art"
+                className="rounded-lg inline-block mr-2"
+                width={30}
+                height={30}
+              />
+              <span className="text-orange-200">What Have You Done To Me?</span>
+              <span className="text-orange-100 ml-1.5 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+                <HiOutlinePlay />
+              </span>
+            </h2>
+            <p>
+              <b>New music&#58;</b> Listen to Imogen&quot;s new single and watch
+              the music video.
+            </p>
+          </CardHeader>
           <CardBody className="overflow-visible p-0">
             <Image
               src={whydtm2}
@@ -32,12 +58,6 @@ export default function Home() {
               className="w-full object-cover"
             />
           </CardBody>
-          <CardFooter className="text-small justify-between font-extralight">
-            <span>
-              <b>New single & video:</b> What Have You Done To Me?
-            </span>
-            <p className="text-default-500">14/02/2023</p>
-          </CardFooter>
         </Card>
       </div>
       <div className="mb-13 grid lg:max-w-4xl lg:w-full lg:mb-0 md:grid-cols-2 lg:grid-cols-3 text-left">
