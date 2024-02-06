@@ -46,8 +46,8 @@ export default function Home() {
               </span>
             </h2>
             <p>
-              <b>New music&#58;</b> Listen to Imogen&quot;s new single and watch
-              the music video.
+              <b>New music&#58;</b> Listen to Imogen’s new single and watch the
+              music video.
             </p>
           </CardHeader>
           <CardBody className="overflow-visible p-0">
@@ -80,9 +80,9 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[100ch] text-sm font-extralight">
-            <b>Be part of the Heapster community.</b> Listen to Imogen&quot;s
-            entire discography, unreleased songs, videos, and watch livestreams
-            or chat with her directly in the app.
+            <b>Be part of the Heapster community.</b> Listen to Imogen’s entire
+            discography, unreleased songs, videos, and watch livestreams or chat
+            with her directly in the app.
           </p>
         </a>
 
@@ -130,9 +130,9 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[100ch] text-sm font-extralight">
-            <b>Check out Imogen&quot;s magical gloves.</b> Music through
-            movement. Learn about the world&quot;s most advanced and innovative
-            wearable musical instrument.
+            <b>Check out Imogen’s magical gloves.</b> Music through movement.
+            Learn about the world’s most advanced and innovative wearable
+            musical instrument.
           </p>
         </a>
 
