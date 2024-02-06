@@ -30,7 +30,6 @@ export default function Home() {
               placeholder="blur"
               shadow="sm"
               radius="lg"
-              width="100%"
               className="w-full object-cover"
             />
           </CardBody>
