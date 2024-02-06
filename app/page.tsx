@@ -27,6 +27,7 @@ export default function Home() {
           <CardBody className="overflow-visible p-0">
             <Image
               src={whydtm2}
+              alt="What Have You Done To Me promo image"
               placeholder="blur"
               className="w-full object-cover"
             />
