@@ -46,8 +46,8 @@ export default function Home() {
               </span>
             </h2>
             <p>
-              <b>New music:</b> Listen to Imogen's new single and watch the
-              music video.
+              <b>New music&#58;</b> Listen to Imogen&quot;s new single and watch
+              the music video.
             </p>
           </CardHeader>
           <CardBody className="overflow-visible p-0">
