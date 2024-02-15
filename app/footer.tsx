@@ -129,9 +129,131 @@ const Footer = () => {
             {(onClose) => (
               <div className="text-sm">
                 <ModalHeader className="flex flex-col gap-1 text-sm">
-                  Privacy Policy and Terms of Use
+                  Privacy Policy
                 </ModalHeader>
                 <ModalBody>
+                  <p className="font-extralight">
+                    This privacy policy has been compiled to better serve those
+                    who are concerned with how their &#39;Personally
+                    identifiable information&#39; (PII) is being used online.
+                    PII, as used in US privacy law and information security, is
+                    information that can be used on its own or with other
+                    information to identify, contact, or locate a single person,
+                    or to identify an individual in context. Please read our
+                    privacy policy carefully to get a clear understanding of how
+                    we collect, use, protect or otherwise handle your Personally
+                    Identifiable Information in accordance with our website.
+                  </p>
+                  <h2 className="font-semibold">1. Data We Collect</h2>
+                  <p className="font-extralight">
+                    When ordering or registering on our site, as appropriate,
+                    you may be asked to enter your name, email address or other
+                    details to help you with your experience.
+                  </p>
+                  <h2 className="font-semibold">2. When We Collect Data</h2>
+                  <p className="font-extralight">
+                    We collect information from you when you register on our
+                    site, fill out a form or enter information on our site.
+                  </p>
+                  <h2 className="font-semibold">3. How We Use Data</h2>
+                  <p className="font-extralight">
+                    We may use the information we collect from you when you
+                    register, make a purchase, sign up for our newsletter,
+                    respond to a survey or marketing communication, surf the
+                    website, or use certain other site features in the following
+                    ways:
+                  </p>
+                  <ul className="font-extralight list-disc list-outside pl-10">
+                    <li>
+                      To personalize user&#39;s experience and to allow us to
+                      deliver the type of content and product offerings in which
+                      you are most interested.
+                    </li>
+                    <li>
+                      To improve our website in order to better serve you.
+                    </li>
+                    <li>
+                      To send periodic emails regarding your order or other
+                      products and services.
+                    </li>
+                  </ul>
+                  <h2 className="font-semibold">4. How We Protect Your Data</h2>
+                  <p className="font-extralight">
+                    The information we collect is low level and we use basic
+                    protection methods.
+                  </p>
+                  <h2 className="font-semibold">5. Use of Cookies</h2>
+                  <p className="font-extralight">
+                    Cookies are small files that a site or its service provider
+                    transfers to your computer&#39;s hard drive through your Web
+                    browser (if you allow) that enables the site&#39;s or
+                    service provider&#39;s systems to recognize your browser and
+                    capture and remember certain information. For instance, we
+                    use cookies to help us remember and process the items in
+                    your shopping cart. They are also used to help us understand
+                    your preferences based on previous or current site activity,
+                    which enables us to provide you with improved services. We
+                    also use cookies to help us compile aggregate data about
+                    site traffic and site interaction so that we can offer
+                    better site experiences and tools in the future.
+                  </p>
+                  <p className="font-extralight">We use cookies to:</p>
+                  <ul className="font-extralight list-disc list-outside pl-10">
+                    <li>
+                      Understand and save user&#39;s preferences for future
+                      visits.
+                    </li>
+                    <li>
+                      Compile aggregate data about site traffic and site
+                      interactions in order to offer better site experiences and
+                      tools in the future. We may also use trusted third party
+                      services that track this information on our behalf.
+                    </li>
+                  </ul>
+                  <p className="font-extralight">
+                    You can choose to have your computer warn you each time a
+                    cookie is being sent, or you can choose to turn off all
+                    cookies. You do this through your browser (like Internet
+                    Explorer) settings. Each browser is a little different, so
+                    look at your browser&#39;s Help menu to learn the correct
+                    way to modify your cookies.
+                  </p>
+                  <p className="font-extralight">
+                    If you disable cookies off, some features will be disabled
+                    It will turn off some of the features that make your site
+                    experience more efficient and some of our services will not
+                    function properly. Any personalised experience, such as
+                    creating or interacting with content will be disabled.
+                  </p>
+                  <h2 className="font-semibold">6. Third Party Disclosure</h2>
+                  <p className="font-extralight">
+                    We do not sell, trade, or otherwise transfer to outside
+                    parties your personally identifiable information unless we
+                    provide you with advance notice. This does not include
+                    website hosting partners and other parties who assist us in
+                    operating our website, conducting our business, or servicing
+                    you, so long as those parties agree to keep this information
+                    confidential. We may also release your information when we
+                    believe release is appropriate to comply with the law,
+                    enforce our site policies, or protect ours or others&#39;
+                    rights, property, or safety.
+                  </p>
+                  <p className="font-extralight">
+                    However, non-personally identifiable visitor information may
+                    be provided to other parties for marketing, advertising, or
+                    other uses.
+                  </p>
+                  <p className="font-extralight">
+                    Occasionally, at our discretion, we may include or offer
+                    third party products or services on our website. These third
+                    party sites have separate and independent privacy policies.
+                    We therefore have no responsibility or liability for the
+                    content and activities of these linked sites. Nonetheless,
+                    we seek to protect the integrity of our site and welcome any
+                    feedback about these sites.
+                  </p>
+                  <h1 className="font-semibold mb-3">Terms of Use</h1>
+
                   <h2 className="font-semibold">1. Terms</h2>
                   <p className="font-extralight">
                     By accessing this web site, you are agreeing to be bound by
