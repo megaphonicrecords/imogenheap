@@ -125,7 +125,7 @@ const Footer = () => {
           onClose={onPrivacyModalClose}
           scrollBehavior="outside"
         >
-          <ModalContent>
+          <ModalContent className="pt-1 pb-3">
             {(onClose) => (
               <div className="text-sm">
                 <ModalHeader className="flex flex-col gap-1 text-sm">
@@ -178,6 +178,73 @@ const Footer = () => {
                     must destroy any downloaded materials in your possession
                     whether in electronic or printed format.
                   </p>
+                  <h2 className="font-semibold">3. Disclaimer</h2>
+                  <p className="font-extralight">
+                    The materials on Megaphonic Ltd&#39;s web site are provided
+                    &quot;as is&quot;. Megaphonic Ltd makes no warranties,
+                    expressed or implied, and hereby disclaims and negates all
+                    other warranties, including without limitation, implied
+                    warranties or conditions of merchantability, fitness for a
+                    particular purpose, or non-infringement of intellectual
+                    property or other violation of rights. Further, Megaphonic
+                    Ltd does not warrant or make any representations concerning
+                    the accuracy, likely results, or reliability of the use of
+                    the materials on its Internet web site or otherwise relating
+                    to such materials or on any sites linked to this site.
+                  </p>
+                  <h2 className="font-semibold">4. Limitations</h2>
+                  <p className="font-extralight">
+                    In no event shall Megaphonic Ltd or its suppliers be liable
+                    for any damages (including, without limitation, damages for
+                    loss of data or profit, or due to business interruption,)
+                    arising out of the use or inability to use the materials on
+                    Megaphonic Ltd&#39;s Internet site, even if Megaphonic Ltd
+                    or a Megaphonic Ltd authorized representative has been
+                    notified orally or in writing of the possibility of such
+                    damage. Because some jurisdictions do not allow limitations
+                    on implied warranties, or limitations of liability for
+                    consequential or incidental damages, these limitations may
+                    not apply to you.
+                  </p>
+                  <h2 className="font-semibold">5. Revisions and Errata</h2>
+                  <p className="font-extralight">
+                    The materials appearing on Megaphonic Ltd&#39;s web site
+                    could include technical, typographical, or photographic
+                    errors. Megaphonic Ltd does not warrant that any of the
+                    materials on its web site are accurate, complete, or
+                    current. Megaphonic Ltd may make changes to the materials
+                    contained on its web site at any time without notice.
+                    Megaphonic Ltd does not, however, make any commitment to
+                    update the materials.
+                  </p>
+                  <h2 className="font-semibold">6. Links</h2>
+                  <p className="font-extralight">
+                    Megaphonic Ltd has not reviewed all of the sites linked to
+                    its Internet web site and is not responsible for the
+                    contents of any such linked site. The inclusion of any link
+                    does not imply endorsement by Megaphonic Ltd of the site.
+                    Use of any such linked web site is at the user&#39;s own
+                    risk.
+                  </p>
+                  <h2 className="font-semibold">
+                    7. Site Terms of Use Modifications
+                  </h2>
+                  <p className="font-extralight">
+                    Megaphonic Ltd may revise these terms of use for its web
+                    site at any time without notice. By using this web site you
+                    are agreeing to be bound by the then current version of
+                    these Terms and Conditions of Use.
+                  </p>
+                  <h2 className="font-semibold">8. Governing Law</h2>
+                  <p className="font-extralight">
+                    Any claim relating to Megaphonic Ltd&#39;s web site shall be
+                    governed by the laws of the United Kingdom without regard to
+                    its conflict of law provisions.
+                  </p>
+                  <p className="font-extralight">
+                    General Terms and Conditions applicable to Use of a Web
+                    Site.
+                  </p>
                 </ModalBody>
               </div>
             )}
@@ -186,9 +253,9 @@ const Footer = () => {
         <Modal
           isOpen={isContactModalOpen}
           onClose={onContactModalClose}
-          placement="top-center"
+          placement="center"
         >
-          <ModalContent>
+          <ModalContent className="pt-1 pb-2">
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1 text-sm">
