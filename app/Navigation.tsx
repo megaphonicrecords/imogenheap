@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Wordmark from "./Wordmark.js";
+import Wordmark from "./ImogenHeapWordmark.js";
 import Ellipse from "../public/images/Ellipse.jpg";
 import IMegaphone from "../public/images/IMegaphone.jpg";
 import Sparks from "../public/images/Sparks.jpg";
