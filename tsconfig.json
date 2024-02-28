@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/ImogenHeapWordmark.js"
+    "app/InteractiveWordmark.js"
   ],
   "exclude": ["node_modules"]
 }
