@@ -36,7 +36,7 @@ export default function Navigation() {
       <Navbar
         maxWidth="full"
         className="lg:max-w-4xl mb-3"
-        position="fixed"
+        position="sticky"
         isBlurred="false"
         onMenuOpenChange={setIsMenuOpen}
         classNames={{
