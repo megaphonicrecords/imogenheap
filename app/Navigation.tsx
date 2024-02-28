@@ -92,14 +92,28 @@ export default function Navigation() {
               <DropdownItem
                 key="autoscaling"
                 description="2014"
-                startContent={<Image width="50" src={Sparks} alt="whydtm" />}
+                startContent={
+                  <Image
+                    className="rounded-md"
+                    width="50"
+                    src={Sparks}
+                    alt="Sparks"
+                  />
+                }
               >
                 Sparks
               </DropdownItem>
               <DropdownItem
                 key="autoscaling"
                 description="2009"
-                startContent={<Image width="50" src={Ellipse} alt="whydtm" />}
+                startContent={
+                  <Image
+                    className="rounded-md"
+                    width="50"
+                    src={Ellipse}
+                    alt="Ellipse"
+                  />
+                }
               >
                 Ellipse
               </DropdownItem>
@@ -107,7 +121,12 @@ export default function Navigation() {
                 key="usage_metrics"
                 description="2005"
                 startContent={
-                  <Image width="50" src={SpeakForYourself} alt="whydtm" />
+                  <Image
+                    className="rounded-md"
+                    width="50"
+                    src={SpeakForYourself}
+                    alt="Speak For Yourself"
+                  />
                 }
               >
                 Speak For Yourself
@@ -115,7 +134,14 @@ export default function Navigation() {
               <DropdownItem
                 key="usage_metrics"
                 description="2002 (with Frou Frou)"
-                startContent={<Image width="50" src={Details} alt="whydtm" />}
+                startContent={
+                  <Image
+                    className="rounded-md"
+                    width="50"
+                    src={Details}
+                    alt="whydtm"
+                  />
+                }
               >
                 Details
               </DropdownItem>
@@ -123,7 +149,12 @@ export default function Navigation() {
                 key="usage_metrics"
                 description="1998"
                 startContent={
-                  <Image width="50" src={IMegaphone} alt="whydtm" />
+                  <Image
+                    className="rounded-md"
+                    width="50"
+                    src={IMegaphone}
+                    alt="I Megaphone"
+                  />
                 }
               >
                 I Megaphone
