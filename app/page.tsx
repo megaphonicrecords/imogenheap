@@ -13,11 +13,7 @@ import {
 } from "@nextui-org/react";
 
 import { RxChevronRight } from "react-icons/rx";
-import { HiOutlinePlay } from "react-icons/hi2";
-
-import Wordmark from "./Wordmark.js";
 import whydtm2 from "../public/images/whydtm2.jpg";
-import whydtm from "../public/images/whydtm.jpg";
 
 export default function Home() {
   return (

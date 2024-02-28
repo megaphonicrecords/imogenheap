@@ -15,9 +15,6 @@ import {
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Wordmark from "./Wordmark.js";
-import whydtm from "../public/images/whydtm.jpg";
-import cb1 from "../public/images/ChordataBytesI1.jpg";
-import cb2 from "../public/images/ChordataBytesII.jpg";
 import Ellipse from "../public/images/Ellipse.jpg";
 import IMegaphone from "../public/images/IMegaphone.jpg";
 import Sparks from "../public/images/Sparks.jpg";
