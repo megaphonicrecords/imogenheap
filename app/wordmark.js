@@ -215,12 +215,39 @@ const Wordmark = (props) => {
   };
 
   return (
-    <svg width="896px" height="173px" viewBox="0 0 896 173" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" {...props}>
-      <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-        <g id="Home" transform="translate(-100.000000, -62.000000)" fillRule="nonzero">
+    <svg
+      width="896px"
+      height="173px"
+      viewBox="0 0 896 173"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      {...props}
+    >
+      <g
+        id="Page-1"
+        stroke="none"
+        strokeWidth={1}
+        fill="none"
+        fillRule="evenodd"
+      >
+        <g
+          id="Home"
+          transform="translate(-100.000000, -62.000000)"
+          fillRule="nonzero"
+        >
           <g id="Imogen-Heap" transform="translate(100.000000, 62.000000)">
             {paths.map((path, index) => (
-              <path key={index} className="wordmark" style={{ animation: `fadeIn 0.4s ease-in-out forwards`, animationDelay: `${randomDelay()}s`, opacity: `0%` }} d={path.d} id={path.id} />
+              <path
+                key={index}
+                className="wordmark"
+                style={{
+                  animation: `fadeIn 0.4s ease-in-out forwards`,
+                  animationDelay: `${randomDelay()}s`,
+                  opacity: `0%`,
+                }}
+                d={path.d}
+                id={path.id}
+              />
             ))}
           </g>
         </g>

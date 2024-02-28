@@ -17,6 +17,9 @@ const config: Config = {
       roman: "lower-roman",
     },
     extend: {
+      textUnderlineOffset: {
+        6: "6px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -45,7 +48,17 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui({
+      themes: {
+        dark: {
+          colors: {
+            background: "rgb(25, 25, 25)",
+          },
+        },
+      },
+    }),
+  ],
 };
 
 export default config;
