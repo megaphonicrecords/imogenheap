@@ -69,12 +69,11 @@ export default function Navigation() {
               Home
             </Link>
           </NavbarItem>
-          <Dropdown isActive={pathname === "/releases"}>
-            <NavbarItem>
+          <Dropdown>
+            <NavbarItem isActive={pathname === "/releases"}>
               <DropdownTrigger>
                 <p
                   color="foreground"
-                  href="/releases"
                   className={`dotLink text-sm hover:font-normal hover:cursor-pointer ${
                     pathname === "/releases" ? "font-normal" : "font-extralight"
                   }`}
@@ -135,20 +134,24 @@ export default function Navigation() {
               ></DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <NavbarItem>
+          <NavbarItem isActive={pathname === "/events"}>
             <Link
               color="foreground"
               href="/events"
-              className="dotLink text-sm font-extralight hover:font-normal"
+              className={`dotLink text-sm hover:font-normal ${
+                pathname === "/events" ? "font-normal" : "font-extralight"
+              }`}
             >
               Events
             </Link>
           </NavbarItem>
-          <NavbarItem>
+          <NavbarItem isActive={pathname === "/blog"}>
             <Link
               color="foreground"
               href="/blog"
-              className="dotLink text-sm font-extralight hover:font-normal"
+              className={`dotLink text-sm hover:font-normal ${
+                pathname === "/blog" ? "font-normal" : "font-extralight"
+              }`}
             >
               Blog
             </Link>
