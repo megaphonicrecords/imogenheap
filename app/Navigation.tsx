@@ -37,7 +37,7 @@ export default function Navigation() {
         maxWidth="full"
         className="lg:max-w-4xl mb-3"
         position="sticky"
-        isBlurred="false"
+        isBlurred={false}
         onMenuOpenChange={setIsMenuOpen}
         classNames={{
           wrapper: ["px-0"],
