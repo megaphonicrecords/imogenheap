@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-{/*Colour Responsive
+ {
+  /*Colour Responsive
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,16 +27,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-*/}
-
-body {
-  color: rgb(255, 255, 255);
-  background: rgb(25, 25, 25)
+*/
 }
 
 .glowBox {
-  @apply 
-  rounded-lg 
+  @apply rounded-xl
   border border-transparent 
   px-5 py-4 
   transition-colors 
@@ -43,9 +39,8 @@ body {
 }
 
 .dotLink {
-  @apply
-  underline
-  underline-offset-4
+  @apply underline
+  underline-offset-6
   decoration-dotted
   decoration-zinc-600;
 }
@@ -53,7 +48,7 @@ body {
 .wordmark {
   fill: #757575;
   transition: fill 10s;
-  transition-delay: 5s; 
+  transition-delay: 5s;
 }
 
 .wordmark:hover {
@@ -62,6 +57,10 @@ body {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

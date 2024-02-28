@@ -45,56 +45,56 @@ const Footer = () => {
         <a
           href="https://www.facebook.com/imogenheap"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaSquareFacebook />
         </a>
         <a
           href="https://www.instagram.com/imogenheap/"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaInstagram />
         </a>
         <a
           href="https://twitter.com/imogenheap"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaXTwitter />
         </a>
         <a
           href="https://www.youtube.com/imogenheap"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaSquareYoutube />
         </a>
         <a
           href="https://open.spotify.com/artist/6Xb4ezwoAQC4516kI89nWz"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaSpotify />
         </a>
         <a
           href="https://music.apple.com/gb/artist/imogen-heap/22873602"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <SiApplemusic />
         </a>
         <a
           href="https://imogenheap.bandcamp.com"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <FaBandcamp />
         </a>
         <a
           href="https://prerelease.creativepassport.net/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
           rel="noopener noreferrer"
-          className="hover:text-white"
+          className="hover:text-foreground"
         >
           <BsPassportFill />
         </a>
@@ -102,13 +102,13 @@ const Footer = () => {
       <div className="container mx-auto mt-4">
         <Link
           onPress={onPrivacyModalOpen}
-          className="text-white mr-4 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-foreground mr-4 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
         >
           Privacy & Terms
         </Link>
         <Link
           onPress={onContactModalOpen}
-          className="text-white text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-foreground text-sm font-extralight hover:font-normal dotLink cursor-pointer"
         >
           Contact
         </Link>
@@ -386,7 +386,6 @@ const Footer = () => {
                 <ModalBody>
                   <Input
                     className="font-extralight"
-                    autoFocus
                     label="Email"
                     variant="bordered"
                   />
