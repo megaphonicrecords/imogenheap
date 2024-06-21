@@ -24,7 +24,6 @@ import {
 } from "react-icons/fa6";
 import { SiApplemusic } from "react-icons/si";
 import { BsPassportFill } from "react-icons/bs";
-import { RxEnvelopeClosed, RxPencil2 } from "react-icons/rx";
 
 const Footer = () => {
   const {
@@ -107,7 +106,7 @@ const Footer = () => {
           Privacy & Terms
         </Link>
         <Link
-          onPress={onContactModalOpen}
+          href="mailto:info@imogenheap.com"
           className="text-foreground text-sm font-extralight hover:font-normal dotLink cursor-pointer"
         >
           Contact

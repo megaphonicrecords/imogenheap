@@ -18,13 +18,13 @@ import whydtm2 from "../public/images/whydtm2.jpg";
 export default function Home() {
   return (
     <>
-      <Image
+      {/*<Image
         src={whydtm2}
         alt="What Have You Done To Me promo image"
         placeholder="blur"
         className="w-full object-cover rounded-xl border border-transparent"
-      />
-      <div className="mb-12 mt-6 grid lg:max-w-4xl lg:w-full md:grid-cols-2 lg:grid-cols-3 text-left">
+  />*/}
+      <div className="mb-12 mt-16 grid lg:max-w-4xl lg:w-full md:grid-cols-2 lg:grid-cols-3 text-left">
         <a
           href="https://imogenheap.app"
           className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(99,156,255,1)]"
@@ -51,19 +51,19 @@ export default function Home() {
         </a>
 
         <a
-          href="https://imogenheap.com/aimogen"
+          href="https://mogen.ai"
           className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(211,247,178,1)]"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-sm font-semibold">
             <Image
               src="/aimogen-icon.png"
-              alt="AiMogen icon"
+              alt="ai.mogen icon"
               className="rounded-lg inline-block mr-2"
               width={30}
               height={30}
             />
-            <span className="text-lime-200">AiMogen</span>
+            <span className="text-lime-200">ai.mogen</span>
             <span className="text-lime-100 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
               <RxChevronRight />
             </span>
