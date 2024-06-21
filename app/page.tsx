@@ -176,6 +176,26 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <div
+        className="lg:max-w-4xl lg:w-full text-center rounded-xl
+  border  
+  px-5 py-4 
+  transition-colors 
+border-dotted border-zinc-700"
+      >
+        <p className="text-sm">Stay tuned.</p>
+        <p className="mb-2 text-sm font-extralight">
+          We're building a new space for all things Imogen Heap.
+        </p>
+        <Button
+          as={Link}
+          color="secondary"
+          href="https://legacy.imogenheap.com"
+          variant="flat"
+        >
+          View Legacy Website
+        </Button>
+      </div>
     </>
   );
 }
