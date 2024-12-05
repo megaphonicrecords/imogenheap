@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/react";
 
 const font = Inconsolata({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
+      <Analytics />
     </html>
   );
 }

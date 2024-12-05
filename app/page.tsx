@@ -101,27 +101,26 @@ export default function Home() {
         </a>
 
         <a
-          href="https://prerelease.creativepassport.net"
-          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(205,83,138,1)]"
+          href="https://id.auracles.io"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(101,83,233,1)]"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-sm font-semibold">
             <Image
-              src="/creativepassport-icon.png"
-              alt="The Creative Passport icon"
+              src="/auracles-icon.png"
+              alt="Auracles icon"
               className="rounded-lg inline-block mr-2"
               width={30}
               height={30}
             />
-            <span className="text-pink-400">The Creative Passport</span>
-            <span className="text-pink-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+            <span className="text-violet-400">Auracles</span>
+            <span className="text-violet-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
               <RxChevronRight />
             </span>
           </h2>
           <p className="m-0 max-w-[100ch] text-sm font-extralight">
-            <b>Sign up to Imogen’s platform for digital identity.</b> A verified
-            digital ID and data hub for musicmakers, services, and
-            representatives.
+            <b>Introducing the missing digital foundation layer for music. </b>A
+            verified ID and information hub for musicmakers, and services.
           </p>
         </a>
 

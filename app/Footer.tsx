@@ -91,7 +91,7 @@ const Footer = () => {
           <FaBandcamp />
         </a>
         <a
-          href="https://prerelease.creativepassport.net/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
+          href="https://id.auracles.io/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
           rel="noopener noreferrer"
           className="hover:text-foreground"
         >
