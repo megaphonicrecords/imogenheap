@@ -33,6 +33,7 @@ export default function Navigation() {
         className="mt-6 sm:mt-12 mb-3 lg:max-w-4xl lg:w-full"
         style={{ width: "100%", height: "100%" }}
       />
+      {/*
       <Navbar
         maxWidth="full"
         className="lg:max-w-4xl mb-3"
@@ -196,6 +197,7 @@ export default function Navigation() {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
+            */}
     </>
   );
 }

@@ -24,7 +24,6 @@ import {
 } from "react-icons/fa6";
 import { SiApplemusic } from "react-icons/si";
 import { BsPassportFill } from "react-icons/bs";
-import { RxEnvelopeClosed, RxPencil2 } from "react-icons/rx";
 
 const Footer = () => {
   const {
@@ -92,7 +91,7 @@ const Footer = () => {
           <FaBandcamp />
         </a>
         <a
-          href="https://prerelease.creativepassport.net/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
+          href="https://id.auracles.io/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
           rel="noopener noreferrer"
           className="hover:text-foreground"
         >
@@ -107,7 +106,7 @@ const Footer = () => {
           Privacy & Terms
         </Link>
         <Link
-          onPress={onContactModalOpen}
+          href="mailto:info@imogenheap.com"
           className="text-foreground text-sm font-extralight hover:font-normal dotLink cursor-pointer"
         >
           Contact
