@@ -33,19 +33,19 @@ export default function Home() {
       <div className="mb-12 mt-16 grid lg:max-w-4xl lg:w-full md:grid-cols-2 lg:grid-cols-3 text-left">
         <a
           href="https://imogenheap.app"
-          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(99,156,255,1)]"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(250,250,250,1)]"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-sm font-semibold">
             <Image
-              src="/app-icon.png"
+              src="/imogensite-square.png"
               alt="Heapster App icon"
               className="rounded-lg inline-block mr-2"
               width={30}
               height={30}
             />
-            <span className="text-blue-500">Imogen Heap App</span>
-            <span className="text-blue-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+            <span className="text-neutral-200">Imogen Heap App</span>
+            <span className="text-neutral-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
               <RxChevronRight />
             </span>
           </h2>
