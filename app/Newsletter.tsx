@@ -84,8 +84,7 @@ export default function Newsletter() {
         @font-face {
           font-display: block;
           font-family: Roboto;
-          src:
-            url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2)
+          src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff)
               format("woff");
@@ -95,8 +94,7 @@ export default function Newsletter() {
           font-display: fallback;
           font-family: Roboto;
           font-weight: 600;
-          src:
-            url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2)
+          src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff)
               format("woff");
@@ -106,8 +104,7 @@ export default function Newsletter() {
           font-display: fallback;
           font-family: Roboto;
           font-weight: 700;
-          src:
-            url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2)
+          src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff)
               format("woff");
@@ -175,7 +172,35 @@ export default function Newsletter() {
       <div>
         <Card className="bg-zinc-800 lg:max-w-4xl lg:w-full text-center rounded-xl border px-5 py-4 transition-colors border-dotted border-zinc-700">
           <CardHeader className="pb-2 text-sm justify-center">
-            Celebrate with me…
+            <div>
+              <h2>Celebrate with me…</h2>
+              <p className="font-extralight my-4">
+                This week marks 20 years since something that truly changed my
+                life, and maybe yours too, if it found its way into your world.
+                To celebrate this milestone, I’d love for you to join me this
+                Friday the 18th at 18:00 UK.
+              </p>
+              <p className="font-extralight mb-4">
+                I’ll be streaming a little something across all the usual
+                places, but the proper party - with live chat and the warm fuzzy
+                feels - will be happening right here. If you're one of the
+                lovely humans already on the Imogen Heap app, you’ll get special
+                access 🌟 And if not, there’s still time to join us at{" "}
+                <a
+                  href="https://imogenheap.app"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:font-normal dotLink cursor-pointer"
+                >
+                  imogenheap.app
+                </a>
+                .
+              </p>
+              <p className="font-extralight">
+                Whether you’ve been with me since the beginning or only just
+                stumbled in, thank you for being part of this journey. See you
+                Friday? Big love, Xx Imogen
+              </p>
+            </div>
           </CardHeader>
           <CardBody className="pt-2">
             <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
