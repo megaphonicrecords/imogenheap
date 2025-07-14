@@ -44,7 +44,7 @@ export default function Home() {
               width={30}
               height={30}
             />
-            <span className="text-blue-500">Heapster App</span>
+            <span className="text-blue-500">Imogen Heap App</span>
             <span className="text-blue-300 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
               <RxChevronRight />
             </span>
@@ -58,19 +58,19 @@ export default function Home() {
 
         <a
           href="https://mogen.ai"
-          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(211,247,178,1)]"
+          className="group glowBox hover:shadow-[0_0px_75px_-25px_rgb(99,180,255,1)]"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-sm font-semibold">
             <Image
-              src="/aimogen-icon.png"
+              src="/mogenai-square.png"
               alt="ai.mogen icon"
               className="rounded-lg inline-block mr-2"
               width={30}
               height={30}
             />
-            <span className="text-lime-200">ai.mogen</span>
-            <span className="text-lime-100 ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
+            <span className="text-[#0191C0]">Mogen AI</span>
+            <span className="text-[#0191C0] ml-1 align-middle inline-block transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none">
               <RxChevronRight />
             </span>
           </h2>
