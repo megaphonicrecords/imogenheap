@@ -54,6 +54,7 @@ const config: Config = {
         dark: {
           colors: {
             background: "rgb(25, 25, 25)",
+            secondary: "#FF00A4",
           },
         },
       },

@@ -14,6 +14,7 @@ import {
 
 import { RxChevronRight } from "react-icons/rx";
 import whydtm2 from "../public/images/whydtm2.jpg";
+import Newsletter from "./Newsletter";
 
 export default function Home() {
   return (
@@ -24,6 +25,11 @@ export default function Home() {
         placeholder="blur"
         className="w-full object-cover rounded-xl border border-transparent"
   />*/}
+      {/* Newsletter Section */}
+      <div className="my-12 w-full lg:max-w-4xl">
+        <Newsletter />
+      </div>
+
       <div className="mb-12 mt-16 grid lg:max-w-4xl lg:w-full md:grid-cols-2 lg:grid-cols-3 text-left">
         <a
           href="https://imogenheap.app"
@@ -174,20 +180,6 @@ export default function Home() {
             team.
           </p>
         </a>
-      </div>
-      <div className="bg-zinc-800 lg:max-w-4xl lg:w-full text-center rounded-xl border px-5 py-4 transition-colors border-dotted border-zinc-700">
-        <p className="text-sm">Stay tuned.</p>
-        <p className="mb-2 text-sm font-extralight">
-          We’re building a new space for all things Imogen Heap.
-        </p>
-        <Button
-          as={Link}
-          color="secondary"
-          href="http://legacy.imogenheap.com/home.php"
-          variant="flat"
-        >
-          View Legacy Website
-        </Button>
       </div>
     </>
   );

@@ -23,6 +23,59 @@ import Details from "../public/images/Details.jpg";
 
 import Image from "next/image";
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function Countdown() {
+  const [seconds, setSeconds] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    const targetTime = 1752840000 * 1000; // Convert to milliseconds
+
+    const updateCountdown = (): void => {
+      const now = Date.now();
+      const difference = targetTime - now;
+
+      if (difference > 0) {
+        const totalSeconds = Math.floor(difference / 1000);
+        setSeconds(totalSeconds);
+      } else {
+        setSeconds(0);
+      }
+    };
+
+    updateCountdown(); // Initial update
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (seconds === null) return null;
+
+  return (
+    <div className="w-full text-center animate-fadeIn">
+      <style jsx>{`
+        @font-face {
+          font-family: "DotFont";
+          src: url("/fonts/dotfont.ttf") format("truetype");
+        }
+        .countdown-font {
+          font-family: "DotFont", monospace;
+          line-height: 0.5;
+          color: #ff00a4;
+        }
+      `}</style>
+      <div className="countdown-font text-[100px] sm:text-[200px] md:text-[240px] lg:text-[270px]">
+        {seconds}
+      </div>
+    </div>
+  );
+}
+
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
@@ -33,6 +86,7 @@ export default function Navigation() {
         className="mt-6 sm:mt-12 mb-3 lg:max-w-4xl lg:w-full"
         style={{ width: "100%", height: "100%" }}
       />
+      <Countdown />
       {/*
       <Navbar
         maxWidth="full"
