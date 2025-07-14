@@ -174,31 +174,34 @@ export default function Newsletter() {
           <CardHeader className="pb-2 text-sm justify-center">
             <div>
               <h2>Celebrate with me…</h2>
-              <p className="font-extralight my-4">
+              <p className="font-extralight my-4 text-balance">
                 This week marks 20 years since something that truly changed my
-                life, and maybe yours too, if it found its way into your world.
-                To celebrate this milestone, I’d love for you to join me this
-                Friday the 18th at 18:00 UK.
+                life, and maybe yours too. I’d love for you to join me this
+                Friday at 18:00 UK.
               </p>
-              <p className="font-extralight mb-4">
-                I’ll be streaming a little something across all the usual
-                places, but the proper party - with live chat and the warm fuzzy
-                feels - will be happening right here. If you&apos;re one of the
+              <p className="font-extralight mb-4 text-balance">
+                I’ll be streaming across all the usual places, but the proper
+                party will be happening right here. If you&apos;re one of the
                 lovely humans already on the Imogen Heap app, you’ll get special
-                access 🌟 And if not, there’s still time to join us at{" "}
+                access 🌟 And if not, there’s still time to{" "}
                 <a
                   href="https://imogenheap.app"
                   rel="noopener noreferrer"
                   className="text-foreground hover:font-normal dotLink cursor-pointer"
                 >
-                  imogenheap.app
+                  join us
                 </a>
                 .
               </p>
-              <p className="font-extralight">
+              <p className="font-extralight text-balance">
                 Whether you’ve been with me since the beginning or only just
                 stumbled in, thank you for being part of this journey. See you
-                Friday? Big love, Xx Imogen
+                Friday? Big love,{" "}
+              </p>
+              <p className="mt-4">
+                <span style={{ fontFamily: "Immi, sans-serif" }}>
+                  Xx Imogen
+                </span>
               </p>
             </div>
           </CardHeader>
