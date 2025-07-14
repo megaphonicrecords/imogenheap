@@ -51,6 +51,13 @@ export default function Newsletter() {
     setShowError(false);
     setShowSuccess(false);
 
+    // Validate email field is not empty
+    if (!email.trim()) {
+      setShowError(true);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("EMAIL", email);
