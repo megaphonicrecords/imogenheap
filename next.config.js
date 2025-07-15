@@ -119,6 +119,12 @@ module.exports = {
         destination: "http://legacy.imogenheap.com/vote",
         permanent: true,
       },
+      {
+        source: "/subscribe",
+        destination:
+          "https://f7d6e1ff.sibforms.com/serve/MUIFAEpVZB1hMDQxUG3TkLue5HhKSHZJAT-H9OSYFV5Yv5HGKt_YOIZxteveKEESjIpDKPg3TkdvzXOA83i7ENRKqP7KYsdDDGJ4ztPRq09pyyqwH23yl_vg-prrhWjiSp9J4OjeFuru4cQQ2ZPc_sw08PxNOJQrC6W1LSwTqEcQ8Ot8E9u_8uZDNieSXWOYKZApKqM9yRDPy1dH",
+        permanent: true,
+      },
     ];
   },
 };
