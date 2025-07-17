@@ -186,13 +186,13 @@ export default function Home() {
           unoptimized
         />
         <p className="mt-4 text-sm text-left w-fit bg-gradient-to-r from-[rgba(255,0,164,0.25)] to-transparent">
-          Preorder the x250 limited edition CMYK 2×LP
+          Preorder the limited edition 2×LP
         </p>
         <p className="text-left font-light text-sm mt-4">
           The 20th anniversary remaster is avaliable for preorder now. Two
-          editions pressed on 45rpm double vinyl, protected by polylined inner
-          sleeves. Packaged in a spot UV gatefold jacket with lyrics, poster,
-          and redeemable digital Heapster badge.
+          coloured variants pressed on 45rpm double vinyl, protected by
+          polylined inner sleeves. Packaged in a spot UV gatefold jacket with
+          lyrics, poster, and redeemable digital Heapster badge.
         </p>
       </div>
       <div className="flex gap-2 mb-16 w-full justify-center">
