@@ -178,7 +178,7 @@ export default function Home() {
       </h1>
       <div className="w-full mb-4 sm:mb-12">
         <Image
-          src="/images/ass.jpg"
+          src="/images/hero.jpg"
           alt="Speak for Yourself (20th Anniversary Remaster)"
           className="w-full rounded-xl border border-black/20"
           width={1000}

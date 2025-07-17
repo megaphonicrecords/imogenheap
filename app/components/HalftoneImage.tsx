@@ -555,15 +555,6 @@ export default function HalftoneImage({
               </Button>
               <Button
                 variant="flat"
-                color="success"
-                className="gap-2"
-                onClick={handleDownload}
-                startContent={<TbDownload size={18} />}
-              >
-                Save
-              </Button>
-              <Button
-                variant="flat"
                 color="default"
                 className="gap-2"
                 startContent={
@@ -572,6 +563,15 @@ export default function HalftoneImage({
                 onClick={() => setIsRounded(!isRounded)}
               >
                 {isRounded ? "Grid" : "Radial"}
+              </Button>
+              <Button
+                variant="flat"
+                color="success"
+                className="gap-2"
+                onClick={handleDownload}
+                startContent={<TbDownload size={18} />}
+              >
+                Save
               </Button>
             </div>
 
