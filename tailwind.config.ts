@@ -54,7 +54,6 @@ const config: Config = {
   plugins: [
     nextui({
       themes: {
-        dark: {
         light: {
           colors: {
             background: "#dddddd",
