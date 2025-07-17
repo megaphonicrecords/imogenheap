@@ -99,9 +99,26 @@ const Footer = () => {
         </a>
       </div>
       <div className="container mx-auto mt-4">
+        <span className="text-zinc-600 text-center text-sm font-light mr-2">
+          &copy; {currentYear}{" "}
+          <Link
+            href="https://megaphonicrecords.com/"
+            className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
+          >
+            Megaphonic
+          </Link>
+          . Website powered by{" "}
+          <Link
+            href="https://auracles.io"
+            className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
+          >
+            Auracles
+          </Link>
+          .
+        </span>
         <Link
           onPress={onPrivacyModalOpen}
-          className="text-foreground mr-4 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-foreground mr-3 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
         >
           Privacy & Terms
         </Link>
@@ -112,12 +129,6 @@ const Footer = () => {
           Contact
         </Link>
       </div>
-      <div className="container mx-auto mt-4">
-        <p className="text-zinc-600 text-center text-sm font-light">
-          &copy; {currentYear} Megaphonic
-        </p>
-      </div>
-
       <>
         <Modal
           isOpen={isPrivacyModalOpen}

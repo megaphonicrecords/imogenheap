@@ -17,6 +17,9 @@ const config: Config = {
       roman: "lower-roman",
     },
     extend: {
+      fontFamily: {
+        immi: ["Immi", "sans-serif"],
+      },
       textUnderlineOffset: {
         6: "6px",
       },
@@ -52,8 +55,9 @@ const config: Config = {
     nextui({
       themes: {
         dark: {
+        light: {
           colors: {
-            background: "rgb(25, 25, 25)",
+            background: "#dddddd",
             secondary: "#FF00A4",
           },
         },

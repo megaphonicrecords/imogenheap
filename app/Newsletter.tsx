@@ -91,7 +91,8 @@ export default function Newsletter() {
         @font-face {
           font-display: block;
           font-family: Roboto;
-          src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2)
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff)
               format("woff");
@@ -101,7 +102,8 @@ export default function Newsletter() {
           font-display: fallback;
           font-family: Roboto;
           font-weight: 600;
-          src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2)
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff)
               format("woff");
@@ -111,7 +113,8 @@ export default function Newsletter() {
           font-display: fallback;
           font-family: Roboto;
           font-weight: 700;
-          src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2)
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2)
               format("woff2"),
             url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff)
               format("woff");
@@ -176,43 +179,20 @@ export default function Newsletter() {
         }
       `}</style>
 
-      <div>
-        <Card className="bg-zinc-800 lg:max-w-4xl lg:w-full text-center rounded-xl border px-5 py-4 transition-colors border-dotted border-zinc-700">
-          <CardHeader className="pb-2 text-sm justify-center">
-            <div>
-              <h2>Celebrate with me…</h2>
-              <p className="font-extralight my-4 text-balance">
-                This week marks 20 years since something that truly changed my
-                life, and maybe yours too. I’d love for you to join me this
-                Friday at 18:00 UK.
-              </p>
-              <p className="font-extralight mb-4 text-balance">
-                I’ll be streaming across all the usual places, but the proper
-                party will be happening right here. If you&apos;re one of the
-                lovely humans already on the Imogen Heap app, you’ll get special
-                access 🌟 And if not, there’s still time to{" "}
-                <a
-                  href="https://imogenheap.app"
-                  rel="noopener noreferrer"
-                  className="text-foreground hover:font-normal dotLink cursor-pointer"
-                >
-                  join us
-                </a>
-                .
-              </p>
-              <p className="font-extralight text-balance">
-                Whether you’ve been with me since the beginning or only just
-                stumbled in, thank you for being part of this journey. See you
-                Friday? Big love,{" "}
-              </p>
-              <p className="mt-4">
-                <span style={{ fontFamily: "Immi, sans-serif" }}>
-                  Xx Imogen
-                </span>
-              </p>
-            </div>
-          </CardHeader>
-          <CardBody className="pt-2">
+      <div className="text-center  px-5 py-4">
+        <div className="px-5 py-4">
+          <div>
+            <p className="font-light text-balance text-sm">
+              If you'd like to stay in the loop about music, experiments,
+              <br></br>
+              events, and the occasional heartfelt ramble, just enter your email
+              below…
+            </p>
+            <p className="mt-4">
+              <span style={{ fontFamily: "Immi, sans-serif" }}>Xx Imogen</span>
+            </p>
+          </div>
+          <div className="pt-2">
             <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
               <Input
                 type="email"
@@ -224,9 +204,9 @@ export default function Newsletter() {
                 labelPlacement="outside"
                 variant="bordered"
                 classNames={{
-                  input: "text-white",
+                  input: "text-[#FF00A4]",
                   inputWrapper:
-                    "border-zinc-600 hover:border-zinc-500 focus-within:border-pink-400 max-w-md mx-auto",
+                    "border-zinc-300 border-1 hover:border-zinc-500 focus-within:border-pink-400 max-w-md mx-auto",
                   label: "text-zinc-300 font-medium",
                 }}
                 required
@@ -238,7 +218,7 @@ export default function Newsletter() {
                 color="secondary"
                 variant="flat"
                 isLoading={isLoading}
-                className="mx-auto"
+                className="mx-auto bg-secondary text-white"
               >
                 {isLoading ? "SUBSCRIBING..." : "SUBSCRIBE TO NEWSLETTER"}
               </Button>
@@ -263,8 +243,8 @@ export default function Newsletter() {
                 <span>Your subscription has been successful.</span>
               </div>
             )}
-          </CardBody>
-        </Card>
+          </div>
+        </div>
       </div>
     </>
   );

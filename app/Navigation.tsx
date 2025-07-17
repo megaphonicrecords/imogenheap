@@ -7,90 +7,35 @@ import {
   NavbarContent,
   NavbarItem,
   Button,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
+  Modal,
+  ModalContent,
+  ModalBody,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Wordmark from "./InteractiveWordmark.js";
-import Ellipse from "../public/images/Ellipse.jpg";
-import IMegaphone from "../public/images/IMegaphone.jpg";
-import Sparks from "../public/images/Sparks.jpg";
-import SpeakForYourself from "../public/images/SpeakForYourself.jpg";
-import Details from "../public/images/Details.jpg";
-
 import Image from "next/image";
+import Newsletter from "./Newsletter";
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+interface NavigationProps {
+  onDrawerToggle: (contentType: "events" | "releases" | "blog") => void;
+  isDrawerOpen: boolean;
+  drawerContentType: "events" | "releases" | "blog";
 }
 
-function Countdown() {
-  const [seconds, setSeconds] = React.useState<number | null>(null);
-
-  React.useEffect(() => {
-    const targetTime = 1752840000 * 1000; // Convert to milliseconds
-
-    const updateCountdown = (): void => {
-      const now = Date.now();
-      const difference = targetTime - now;
-
-      if (difference > 0) {
-        const totalSeconds = Math.floor(difference / 1000);
-        setSeconds(totalSeconds);
-      } else {
-        setSeconds(0);
-      }
-    };
-
-    updateCountdown(); // Initial update
-    const interval = setInterval(updateCountdown, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  if (seconds === null) return null;
-
-  return (
-    <div className="w-full text-center animate-fadeIn">
-      <style jsx>{`
-        @font-face {
-          font-family: "DotFont";
-          src: url("/fonts/dotfont.ttf") format("truetype");
-        }
-        .countdown-font {
-          font-family: "DotFont", monospace;
-          line-height: 0.5;
-          color: #ff00a4;
-        }
-      `}</style>
-      <div className="countdown-font text-[100px] sm:text-[200px] md:text-[240px] lg:text-[270px]">
-        {seconds}
-      </div>
-    </div>
-  );
-}
-
-export default function Navigation() {
+export default function Navigation({
+  onDrawerToggle,
+  isDrawerOpen,
+  drawerContentType,
+}: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
   const pathname = usePathname();
 
   return (
-    <>
-      <Wordmark
-        className="mt-6 sm:mt-12 mb-3 lg:max-w-4xl lg:w-full"
-        style={{ width: "100%", height: "100%" }}
-      />
-      <Countdown />
-      {/*
+    <div className="w-full relative z-[30]">
       <Navbar
         maxWidth="full"
-        className="lg:max-w-4xl mb-3"
+        className="mb-3 w-full pl-4 pr-3 bg-transparent"
         position="sticky"
         isBlurred={false}
         onMenuOpenChange={setIsMenuOpen}
@@ -112,8 +57,15 @@ export default function Navigation() {
           ],
         }}
       >
-        <NavbarContent className="sm:flex gap-4" justify="center">
+        <NavbarContent className="sm:flex gap-4 sm:gap-5" justify="center">
           <NavbarItem isActive={pathname === "/"}>
+            <Image
+              src="/imogensite-alt-icon.svg"
+              alt="Imogen Heap"
+              width={18}
+              height={18}
+              className="mr-3 sm:mr-4"
+            />
             <Link
               color="foreground"
               href="/"
@@ -121,137 +73,99 @@ export default function Navigation() {
                 pathname === "/" ? "font-normal" : "font-extralight"
               }`}
             >
-              Home
+              Imogen Heap
             </Link>
           </NavbarItem>
-          <Dropdown>
-            <NavbarItem isActive={pathname === "/releases"}>
-              <DropdownTrigger>
-                <p
-                  color="foreground"
-                  className={`dotLink text-sm hover:font-normal hover:cursor-pointer ${
-                    pathname === "/releases" ? "font-normal" : "font-extralight"
-                  }`}
-                >
-                  Releases
-                </p>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
+          <NavbarItem
+            isActive={isDrawerOpen && drawerContentType === "releases"}
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDrawerToggle("releases");
               }}
-            >
-              <DropdownItem
-                key="autoscaling"
-                description="2014"
-                startContent={
-                  <Image
-                    className="rounded-md"
-                    width="50"
-                    src={Sparks}
-                    alt="Sparks"
-                  />
-                }
-              >
-                Sparks
-              </DropdownItem>
-              <DropdownItem
-                key="autoscaling"
-                description="2009"
-                startContent={
-                  <Image
-                    className="rounded-md"
-                    width="50"
-                    src={Ellipse}
-                    alt="Ellipse"
-                  />
-                }
-              >
-                Ellipse
-              </DropdownItem>
-              <DropdownItem
-                key="usage_metrics"
-                description="2005"
-                startContent={
-                  <Image
-                    className="rounded-md"
-                    width="50"
-                    src={SpeakForYourself}
-                    alt="Speak For Yourself"
-                  />
-                }
-              >
-                Speak For Yourself
-              </DropdownItem>
-              <DropdownItem
-                key="usage_metrics"
-                description="2002 (with Frou Frou)"
-                startContent={
-                  <Image
-                    className="rounded-md"
-                    width="50"
-                    src={Details}
-                    alt="whydtm"
-                  />
-                }
-              >
-                Details
-              </DropdownItem>
-              <DropdownItem
-                key="usage_metrics"
-                description="1998"
-                startContent={
-                  <Image
-                    className="rounded-md"
-                    width="50"
-                    src={IMegaphone}
-                    alt="I Megaphone"
-                  />
-                }
-              >
-                I Megaphone
-              </DropdownItem>
-              <DropdownItem
-                key="autoscaling"
-                description="View full discography"
-              ></DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          <NavbarItem isActive={pathname === "/events"}>
-            <Link
-              color="foreground"
-              href="/events"
               className={`dotLink text-sm hover:font-normal ${
-                pathname === "/events" ? "font-normal" : "font-extralight"
+                isDrawerOpen && drawerContentType === "releases"
+                  ? "font-normal"
+                  : "font-extralight"
+              }`}
+            >
+              Music
+            </button>
+          </NavbarItem>
+          <NavbarItem isActive={isDrawerOpen && drawerContentType === "events"}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDrawerToggle("events");
+              }}
+              className={`dotLink text-sm hover:font-normal ${
+                isDrawerOpen && drawerContentType === "events"
+                  ? "font-normal"
+                  : "font-extralight"
               }`}
             >
               Events
-            </Link>
+            </button>
           </NavbarItem>
-          <NavbarItem isActive={pathname === "/blog"}>
-            <Link
-              color="foreground"
-              href="/blog"
+          <NavbarItem isActive={isDrawerOpen && drawerContentType === "blog"}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDrawerToggle("blog");
+              }}
               className={`dotLink text-sm hover:font-normal ${
-                pathname === "/blog" ? "font-normal" : "font-extralight"
+                isDrawerOpen && drawerContentType === "blog"
+                  ? "font-normal"
+                  : "font-extralight"
               }`}
             >
               Blog
-            </Link>
+            </button>
+          </NavbarItem>
+          <NavbarItem>
+            <button
+              onClick={() => setIsNewsletterOpen(true)}
+              className="dotLink text-sm font-extralight hover:font-normal"
+            >
+              Newsletter
+            </button>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent justify="end">
+        <NavbarContent justify="end" className="gap-4 hidden sm:flex">
           <NavbarItem>
-            <Button as={Link} color="secondary" href="#" variant="flat">
-              Demo AiMogen
+            <Button
+              as={Link}
+              color="secondary"
+              href="#"
+              variant="flat"
+              className="p-3 gap-2 bg-gradient-to-b from-zinc-800 to-black text-[#D0E321]"
+            >
+              <Image
+                src="/heapsterid-icon.svg"
+                alt="HeapsterID"
+                width={16}
+                height={16}
+              />
+              Heapster<span className="hidden sm:inline -ml-1">ID</span>
             </Button>
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-            */}
-    </>
+
+      <Modal
+        isOpen={isNewsletterOpen}
+        onOpenChange={setIsNewsletterOpen}
+        size="2xl"
+        scrollBehavior="inside"
+        backdrop="blur"
+      >
+        <ModalContent>
+          <ModalBody className="p-0">
+            <Newsletter />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </div>
   );
 }

@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inconsolata } from "next/font/google";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "./Footer";
-import Navigation from "./Navigation";
-import { Providers } from "./providers";
+import ClientLayout from "./ClientLayout";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
@@ -23,18 +20,9 @@ export default function RootLayout({
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
-    <html
-      lang="en"
-      className="flex min-h-screen justify-center items-center dark"
-    >
+    <html lang="en" className="min-h-screen justify-center items-center light">
       <body className={font.className}>
-        <Providers>
-          <main className="flex-col items-center justify-between px-6 sm:px-12 md:px-24 lg:px-0 lg:max-w-4xl mx-auto">
-            <Navigation />
-            {children}
-          </main>
-          <Footer />
-        </Providers>
+        <ClientLayout>{children}</ClientLayout>
       </body>
       {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
       <Analytics />
