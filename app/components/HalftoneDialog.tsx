@@ -21,7 +21,7 @@ export default function HalftoneDialog({
       <ModalContent>
         <div className="sm:p-8 p-4 space-y-4">
           <h2 className="text-sm font-bold">
-            'Speak For Yourself' CMYK Filter
+            &apos;Speak For Yourself&apos; CMYK Filter
           </h2>
           <HalftoneImage
             size={800}

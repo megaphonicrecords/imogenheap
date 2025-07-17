@@ -19,9 +19,11 @@ interface GlowBoxItem {
   description: React.ReactNode;
 }
 
+// Move targetDate outside components to avoid useEffect dependency warnings
+const targetDate = new Date("2025-07-18T18:00:00+01:00");
+
 const LiveBadge = () => {
   const [isLive, setIsLive] = useState(false);
-  const targetDate = new Date("2025-07-18T18:00:00+01:00");
 
   useEffect(() => {
     const checkLiveStatus = () => {
@@ -49,7 +51,6 @@ const LiveBadge = () => {
 
 const CountdownText = () => {
   const [timeLeft, setTimeLeft] = useState<string>("with us...");
-  const targetDate = new Date("2025-07-18T18:00:00+01:00"); // BST is UTC+1
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -89,7 +90,7 @@ const glowBoxData: GlowBoxItem[] = [
     color: "#333333",
     description: (
       <>
-        <b>Be part of the Heapster community.</b> Listen to Imogen's entire
+        <b>Be part of the Heapster community.</b> Listen to Imogen&apos;s entire
         discography, unreleased songs, videos, and watch livestreams or chat
         with her directly in the app.
       </>
@@ -103,9 +104,9 @@ const glowBoxData: GlowBoxItem[] = [
     color: "#048AB8",
     description: (
       <>
-        <b>Learn about Imogen's ongoing AI project.</b> Talk to Augmented Imogen
-        Heap, help contribute to the AImogen model, and see roadmap of its
-        development.
+        <b>Learn about Imogen&apos;s ongoing AI project.</b> Talk to Augmented
+        Imogen Heap, help contribute to the AImogen model, and see roadmap of
+        its development.
       </>
     ),
   },
@@ -133,7 +134,7 @@ const glowBoxData: GlowBoxItem[] = [
       <>
         <b>The online multiplayer loop station.</b> An innovative workflow
         perfect for generating ideas. Play solo or jam together online. Recently
-        aquired by Imogen's music lab, HabLab London.
+        aquired by Imogen&apos;s music lab, HabLab London.
       </>
     ),
   },
@@ -145,9 +146,9 @@ const glowBoxData: GlowBoxItem[] = [
     color: "#2CA2A5",
     description: (
       <>
-        <b>Check out Imogen's magical gloves.</b> Music through movement. Learn
-        about the world's most advanced and innovative wearable musical
-        instrument.
+        <b>Check out Imogen&apos;s magical gloves.</b> Music through movement.
+        Learn about the world&apos;s most advanced and innovative wearable
+        musical instrument.
       </>
     ),
   },
@@ -351,7 +352,7 @@ export default function Home() {
             </motion.a>
           </div>
           <p className="mt-4 text-sm text-left w-fit bg-gradient-to-r from-[rgba(255,0,164,0.25)] to-transparent">
-            'Speak for Yourself' remastering discussion
+            &apos;Speak for Yourself&apos; remastering discussion
           </p>
           <p className="text-left font-light text-sm mt-4">
             Watch a clip from when Imogen sat down with Simon Heyworth, who
@@ -429,8 +430,9 @@ export default function Home() {
             Hide and Seek (Dolby Atmos)
           </p>
           <p className="text-left font-light text-sm mt-4">
-            Listen to the brand new Dolby Atmos mix of 'Hide and Seek'. It's
-            lush, immersive, goosebump-inducing, and exclusive to Apple Music.
+            Listen to the brand new Dolby Atmos mix of &apos;Hide and
+            Seek&apos;. It&apos;s lush, immersive, goosebump-inducing, and
+            exclusive to Apple Music.
           </p>
         </div>
         <div className="relative w-full">
@@ -496,8 +498,9 @@ export default function Home() {
             Make your own artwork
           </p>
           <p className="text-left font-light text-sm mt-4">
-            Use the web editor to make your own 'Speak For Yourself' style
-            artwork to celebrate. Share your creations with the #SFY20 hashtag.
+            Use the web editor to make your own &apos;Speak For Yourself&apos;
+            style artwork to celebrate. Share your creations with the #SFY20
+            hashtag.
           </p>
         </div>
       </div>
