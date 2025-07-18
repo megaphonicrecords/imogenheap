@@ -20,14 +20,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
     <html lang="en" className="min-h-screen justify-center items-center light">
       <body className={font.className}>
         <ClientLayout>{children}</ClientLayout>
       </body>
-      {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
+      <GoogleAnalytics gaId="G-GKM5QWJG2G" />
       <Analytics />
     </html>
   );
