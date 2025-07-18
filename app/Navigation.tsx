@@ -192,7 +192,7 @@ export default function Navigation({
                 className="mb-4"
               />{" "}
               <p className="text-[#d0e321] text-sm">
-                You'll be able to access this later today.
+                You&apos;ll be able to access this later today.
               </p>
             </div>
           </ModalBody>
