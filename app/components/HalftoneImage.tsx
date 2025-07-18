@@ -530,11 +530,56 @@ export default function HalftoneImage({
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const link = document.createElement("a");
-    link.download = "halftone-artwork.jpg";
-    // Convert to high-quality JPEG
-    link.href = canvas.toDataURL("image/jpeg", 1.0);
-    link.click();
+    const imageDataUrl = canvas.toDataURL("image/jpeg", 1.0);
+
+    // Detect if user is on mobile/iOS
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      ) ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+
+    if (isMobile) {
+      // Mobile/iOS: Open in new tab with download button
+      const newWindow = window.open();
+      if (newWindow) {
+        newWindow.document.write(`
+          <html>
+            <head>
+              <title>Halftone Artwork</title>
+              <style>
+                body { margin: 0; padding: 20px; background: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+                img { max-width: 100%; max-height: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+                .download-btn { font-family: 'Inconsolata', monospace; position: fixed; top: 20px; right: 20px; background: #FF00A4; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; cursor: pointer; }
+              </style>
+            </head>
+            <body>
+              <img src="${imageDataUrl}" alt="Halftone Artwork" />
+              <button class="download-btn" onclick="
+                const link = document.createElement('a');
+                link.download = 'halftone-artwork.jpg';
+                link.href = '${imageDataUrl}';
+                link.click();
+              ">Download</button>
+            </body>
+          </html>
+        `);
+        newWindow.document.close();
+      } else {
+        // Fallback: direct download
+        const link = document.createElement("a");
+        link.download = "halftone-artwork.jpg";
+        link.href = imageDataUrl;
+        link.click();
+      }
+    } else {
+      // Desktop: Direct download (works better)
+      const link = document.createElement("a");
+      link.download = "halftone-artwork.jpg";
+      link.href = imageDataUrl;
+      link.click();
+    }
   };
 
   const updateLevelsAndGamma = (clientX: number, clientY: number) => {

@@ -70,7 +70,7 @@ export default function Navigation({
               color="foreground"
               href="/"
               className={`dotLink text-sm hover:font-normal ${
-                pathname === "/" ? "font-normal" : "font-extralight"
+                pathname === "/" ? "font-normal" : "font-light"
               }`}
             >
               Imogen Heap
@@ -87,7 +87,7 @@ export default function Navigation({
               className={`dotLink text-sm hover:font-normal ${
                 isDrawerOpen && drawerContentType === "releases"
                   ? "font-normal"
-                  : "font-extralight"
+                  : "font-light"
               }`}
             >
               Music
@@ -102,7 +102,7 @@ export default function Navigation({
               className={`dotLink text-sm hover:font-normal ${
                 isDrawerOpen && drawerContentType === "events"
                   ? "font-normal"
-                  : "font-extralight"
+                  : "font-light"
               }`}
             >
               Events
@@ -117,7 +117,7 @@ export default function Navigation({
               className={`dotLink text-sm hover:font-normal ${
                 isDrawerOpen && drawerContentType === "blog"
                   ? "font-normal"
-                  : "font-extralight"
+                  : "font-light"
               }`}
             >
               Blog
@@ -126,7 +126,7 @@ export default function Navigation({
           <NavbarItem>
             <button
               onClick={() => setIsNewsletterOpen(true)}
-              className="dotLink text-sm font-extralight hover:font-normal"
+              className="dotLink text-sm font-light hover:font-normal"
             >
               Newsletter
             </button>

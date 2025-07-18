@@ -118,13 +118,13 @@ const Footer = () => {
         </span>
         <Link
           onPress={onPrivacyModalOpen}
-          className="text-foreground mr-3 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-zinc-600 mr-3 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Privacy & Terms
         </Link>
         <Link
           href="mailto:info@imogenheap.com"
-          className="text-foreground text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Contact
         </Link>
