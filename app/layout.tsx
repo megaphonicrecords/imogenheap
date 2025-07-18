@@ -10,6 +10,9 @@ const font = Inconsolata({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Imogen Heap",
   description: "Imogen Heap official website and portal.",
+  other: {
+    "font-preload": "/fonts/immi.ttf",
+  },
 };
 
 export default function RootLayout({

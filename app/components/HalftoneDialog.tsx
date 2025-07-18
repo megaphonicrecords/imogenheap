@@ -25,8 +25,12 @@ export default function HalftoneDialog({
           </h2>
           <HalftoneImage
             size={800}
-            dotSize={28}
-            spacing={18}
+            gridDotSize={28}
+            gridSpacing={18}
+            fullWidthGridDotSize={35}
+            fullWidthGridSpacing={22}
+            radialDotSize={32}
+            radialSpacing={24}
             downloadSize={2048}
             halftoneSize={1440}
           />

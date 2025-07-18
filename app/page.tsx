@@ -8,7 +8,8 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 import HalftoneDialog from "./components/HalftoneDialog";
-
+import { BiSolidAlbum } from "react-icons/bi";
+import { PiButterflyFill } from "react-icons/pi";
 // TypeScript interface for glowBox data
 interface GlowBoxItem {
   href: string;
@@ -168,6 +169,49 @@ const glowBoxData: GlowBoxItem[] = [
   },
 ];
 
+// AnimatedText component for character-by-character animation within words
+const AnimatedText = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) => {
+  const words = text.split(" ");
+
+  return (
+    <div className={`${className} break-words`}>
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block">
+          {word.split("").map((char, charIndex) => {
+            const globalIndex =
+              words.slice(0, wordIndex).join(" ").length +
+              wordIndex +
+              charIndex;
+
+            return (
+              <motion.span
+                key={charIndex}
+                initial={{ opacity: 0, filter: "blur(2px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.4,
+                  delay: globalIndex * 0.02,
+                  ease: "easeOut",
+                }}
+                className="inline-block"
+              >
+                {char}
+              </motion.span>
+            );
+          })}
+          {wordIndex < words.length - 1 && "\u00A0"}
+        </span>
+      ))}
+    </div>
+  );
+};
+
 export default function Home() {
   const [isHalftoneOpen, setIsHalftoneOpen] = useState(false);
 
@@ -176,7 +220,7 @@ export default function Home() {
       <h1 className="text-sm text-left mb-4 mt-8 font-bold">
         Announcing: Speak for Yourself (20th Anniversary Remaster)
       </h1>
-      <div className="w-full mb-4 sm:mb-12">
+      <div className="w-full mb-4 sm:mb-8">
         <Image
           src="/images/hero.jpg"
           alt="Speak for Yourself (20th Anniversary Remaster)"
@@ -195,26 +239,38 @@ export default function Home() {
           lyrics, poster, and redeemable digital Heapster badge.
         </p>
       </div>
-      <div className="flex gap-2 mb-16 w-full justify-center">
+      <div className="flex gap-2 mb-8 w-full justify-center">
         <Button
           as={Link}
-          color="secondary"
-          href="#"
+          href="https://shop.imogenheap.com/release/517814-imogen-heap-speak-for-yourself-20th-anniversary-remaster"
           variant="flat"
-          className="gap-2"
+          className="gap-2 bg-black/25 hover:bg-black/20 transition-colors duration-300 text-black"
         >
-          PREORDER BLACK
+          <BiSolidAlbum size={18} /> PREORDER 180G BLACK
         </Button>
         <Button
           as={Link}
           color="secondary"
-          href="#"
+          href="https://shop.imogenheap.com/release/517814-imogen-heap-speak-for-yourself-20th-anniversary-remaster"
           variant="flat"
           className="gap-2"
         >
-          PREORDER CMYK
+          <PiButterflyFill size={18} />
+          PREORDER CMYK Splatter
         </Button>
       </div>
+      <div className="text-sm text-left font-bold border-t-1 border-black border-dotted pt-4 mt-16 mb-14 opacity-25"></div>
+
+      <div className="flex gap-2 w-full justify-center">
+        <div className="max-w-full">
+          <AnimatedText
+            text="Today marks 20 years since something that truly changed my life, and maybe yours too. To celebrate this milestone, I am releasing an anniversary vinyl of my record Speak for Yourself you can now pre-order. This limited pressing will be mailed out in October which is also when I will finally have all the publishing rights back! Hooray!"
+            className="text-2xl text-left font-bold font-immi text-black/20"
+          />
+        </div>
+      </div>
+      <div className="text-sm text-left font-bold border-t-1 border-black border-dotted pt-4 mt-16 mb-14 opacity-25"></div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <div>
           <div className="relative w-full group">
@@ -302,7 +358,7 @@ export default function Home() {
               height={1000}
             />
             <motion.a
-              href="https://heapster.live"
+              href="http://sfy20.com/remasteringhideandseek"
               className="absolute inset-0 flex items-center justify-center"
               target="_blank"
               rel="noopener noreferrer"
@@ -376,7 +432,7 @@ export default function Home() {
               Your browser does not support the video tag.
             </video>
             <motion.a
-              href="https://heapster.live"
+              href="https://sfy20.com/hideandseek"
               className="absolute inset-0 flex items-center justify-center"
               target="_blank"
               rel="noopener noreferrer"
@@ -431,8 +487,8 @@ export default function Home() {
           </p>
           <p className="text-left font-light text-sm mt-4">
             Listen to the brand new Dolby Atmos mix of &apos;Hide and
-            Seek&apos;. It&apos;s lush, immersive, goosebump-inducing, and
-            exclusive to Apple Music.
+            Seek&apos;, exclusive to Apple Music. The stereo remaster is also
+            available on all other music platforms.
           </p>
         </div>
         <div className="relative w-full">

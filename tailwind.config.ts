@@ -18,7 +18,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        immi: ["Immi", "sans-serif"],
+        immi: ["Immi", "Georgia", "Times New Roman", "serif"],
       },
       textUnderlineOffset: {
         6: "6px",

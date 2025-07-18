@@ -6,6 +6,12 @@
   font-family: "Immi";
   src: url("/fonts/immi.ttf") format("truetype");
   font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-immi {
+  font-family: "Immi", "Georgia", "Times New Roman", serif;
 }
 
 /*Colour Responsive

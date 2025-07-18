@@ -1,14 +1,26 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { Button } from "@nextui-org/react";
-import { TbUpload, TbDownload, TbGrid3X3, TbCircle } from "react-icons/tb";
+import {
+  TbUpload,
+  TbDownload,
+  TbGridDots,
+  TbArrowsMaximize,
+} from "react-icons/tb";
+import { BiLoaderCircle } from "react-icons/bi";
 
 interface HalftoneImageProps {
   imageSrc?: string;
   size?: number;
   dotSize?: number;
   spacing?: number;
+  radialDotSize?: number;
+  radialSpacing?: number;
+  gridDotSize?: number;
+  gridSpacing?: number;
+  fullWidthGridDotSize?: number;
+  fullWidthGridSpacing?: number;
   downloadSize?: number;
   halftoneSize?: number;
 }
@@ -16,18 +28,39 @@ interface HalftoneImageProps {
 export default function HalftoneImage({
   imageSrc,
   size = 800,
-  dotSize = 20, // Much larger dots
-  spacing = 80, // Extremely large spacing - should create ~18x18 grid
+  dotSize = 20, // Default for backward compatibility
+  spacing = 80, // Default for backward compatibility
+  radialDotSize,
+  radialSpacing,
+  gridDotSize,
+  gridSpacing,
+  fullWidthGridDotSize,
+  fullWidthGridSpacing,
   downloadSize = 2048,
   halftoneSize = 1440,
 }: HalftoneImageProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hiddenCanvasRef = useRef<HTMLCanvasElement>(null);
   const [currentImage, setCurrentImage] = useState<string | null>(null);
-  const [levels, setLevels] = useState(1.0); // 0.1 to 2.0 range for contrast adjustment
-  const [gamma, setGamma] = useState(1.0); // 0.1 to 3.0 range for gamma adjustment
+  const [levels, setLevels] = useState(1.2); // 0.1 to 2.0 range for contrast adjustment
+  const [gamma, setGamma] = useState(0.2); // 0.1 to 3.0 range for gamma adjustment
   const [isDragging, setIsDragging] = useState(false);
   const [isRounded, setIsRounded] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [isFullWidth, setIsFullWidth] = useState(false);
+  const [isBlackBackground, setIsBlackBackground] = useState(false);
+
+  // Use specific values for each mode, fallback to general props, then defaults
+  const currentDotSize = isRounded
+    ? (radialDotSize ?? dotSize)
+    : isFullWidth
+      ? (fullWidthGridDotSize ?? gridDotSize ?? dotSize)
+      : (gridDotSize ?? dotSize);
+  const currentSpacing = isRounded
+    ? (radialSpacing ?? spacing)
+    : isFullWidth
+      ? (fullWidthGridSpacing ?? gridSpacing ?? spacing)
+      : (gridSpacing ?? spacing);
 
   const getColorForRow = (row: number, totalRows: number) => {
     // Top 4 rows: green
@@ -103,275 +136,395 @@ export default function HalftoneImage({
 
   const getLuminosity = (r: number, g: number, b: number) => {
     // Convert RGB to luminosity using standard weights
-    return 0.299 * r + 0.587 * g + 0.114 * b;
-  };
+    const luminosity = 0.299 * r + 0.587 * g + 0.114 * b;
 
-  const drawHalftone = (image: HTMLImageElement) => {
-    if (!canvasRef.current || !hiddenCanvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const hiddenCanvas = hiddenCanvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const hiddenCtx = hiddenCanvas.getContext("2d");
-
-    if (!ctx || !hiddenCtx) return;
-
-    // Set canvas dimensions - use downloadSize for actual rendering
-    canvas.width = downloadSize;
-    canvas.height = downloadSize;
-    hiddenCanvas.width = downloadSize;
-    hiddenCanvas.height = downloadSize;
-
-    // Fill background with white
-    ctx.fillStyle = "#F9F9F9";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Clear hidden canvas
-    hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
-
-    // Draw image to hidden canvas, cropping to square from center
-    const imageAspect = image.width / image.height;
-    let sourceX, sourceY, sourceSize;
-
-    if (imageAspect > 1) {
-      // Image is wider than tall - crop from center horizontally
-      sourceSize = image.height; // Use height as the square crop size
-      sourceX = (image.width - sourceSize) / 2; // Center horizontally
-      sourceY = 0;
-    } else {
-      // Image is taller than wide - crop from center vertically
-      sourceSize = image.width; // Use width as the square crop size
-      sourceX = 0;
-      sourceY = (image.height - sourceSize) / 2; // Center vertically
+    // If black background is selected, invert the luminosity
+    if (isBlackBackground) {
+      return 255 - luminosity;
     }
 
-    // Draw the square crop to fill the entire hidden canvas
-    hiddenCtx.drawImage(
-      image,
-      sourceX,
-      sourceY,
-      sourceSize,
-      sourceSize, // Source crop (square from center)
-      0,
-      0,
-      downloadSize,
-      downloadSize, // Destination (fill entire hidden canvas)
-    );
+    return luminosity;
+  };
 
-    // Get image data
-    const imageData = hiddenCtx.getImageData(
-      0,
-      0,
-      hiddenCanvas.width,
-      hiddenCanvas.height,
-    );
-    const data = imageData.data;
+  const drawHalftone = useCallback(
+    (image: HTMLImageElement) => {
+      if (!canvasRef.current || !hiddenCanvasRef.current) return;
 
-    if (isRounded) {
-      // Rounded mode: full canvas, radial pattern
-      const centerX = downloadSize / 2;
-      const centerY = downloadSize / 2;
-      const maxRadius = downloadSize / 2;
+      const canvas = canvasRef.current;
+      const hiddenCanvas = hiddenCanvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const hiddenCtx = hiddenCanvas.getContext("2d");
 
-      // Calculate number of rings based on spacing
-      const rings = Math.floor(maxRadius / spacing);
-      const dotsPerRing = [1]; // Center dot
+      if (!ctx || !hiddenCtx) return;
 
-      // Calculate dots per ring (roughly uniform distribution)
-      for (let ring = 1; ring <= rings; ring++) {
-        const circumference = 2 * Math.PI * ring * spacing;
-        const dotsInRing = Math.max(1, Math.floor(circumference / spacing));
-        dotsPerRing.push(dotsInRing);
+      // Set canvas dimensions - use downloadSize for actual rendering
+      canvas.width = downloadSize;
+      canvas.height = downloadSize;
+      hiddenCanvas.width = downloadSize;
+      hiddenCanvas.height = downloadSize;
+
+      // Fill background with selected color
+      ctx.fillStyle = isBlackBackground ? "#000000" : "#F9F9F9";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Clear hidden canvas
+      hiddenCtx.clearRect(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+
+      // Draw image to hidden canvas, cropping to square from center
+      const imageAspect = image.width / image.height;
+      let sourceX, sourceY, sourceSize;
+
+      if (imageAspect > 1) {
+        // Image is wider than tall - crop from center horizontally
+        sourceSize = image.height; // Use height as the square crop size
+        sourceX = (image.width - sourceSize) / 2; // Center horizontally
+        sourceY = 0;
+      } else {
+        // Image is taller than wide - crop from center vertically
+        sourceSize = image.width; // Use width as the square crop size
+        sourceX = 0;
+        sourceY = (image.height - sourceSize) / 2; // Center vertically
       }
 
-      // Draw center dot
-      const imageX = Math.floor((centerX / downloadSize) * hiddenCanvas.width);
-      const imageY = Math.floor((centerY / downloadSize) * hiddenCanvas.height);
-      const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
-
-      const r = data[pixelIndex] || 0;
-      const g = data[pixelIndex + 1] || 0;
-      const b = data[pixelIndex + 2] || 0;
-
-      const luminosity = getLuminosity(r, g, b);
-      const adjustedLuminosity = Math.min(
-        255,
-        Math.max(0, luminosity * levels),
+      // Draw the square crop to fill the entire hidden canvas
+      hiddenCtx.drawImage(
+        image,
+        sourceX,
+        sourceY,
+        sourceSize,
+        sourceSize, // Source crop (square from center)
+        0,
+        0,
+        downloadSize,
+        downloadSize, // Destination (fill entire hidden canvas)
       );
-      const gammaAdjustedLuminosity =
-        Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
-      const normalizedLuminosity = gammaAdjustedLuminosity / 255;
-      const dotRadius = (1 - normalizedLuminosity) * (dotSize / 2) * 0.65;
 
-      if (dotRadius > 0.5) {
-        // Center dot gets the highest ring index (innermost)
-        const ringIndex = rings + 1; // Higher than any actual ring
-        const { color, stroke, strokeColor } = getColorForRadialRing(ringIndex);
+      // Get image data
+      const imageData = hiddenCtx.getImageData(
+        0,
+        0,
+        hiddenCanvas.width,
+        hiddenCanvas.height,
+      );
+      const data = imageData.data;
 
-        if (stroke > 0) {
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, dotRadius, 0, Math.PI * 2);
-          ctx.fillStyle = strokeColor;
-          ctx.fill();
+      if (isRounded) {
+        // Rounded mode: full canvas, radial pattern
+        const centerX = downloadSize / 2;
+        const centerY = downloadSize / 2;
+        const maxRadius = downloadSize / 2;
 
-          const innerRadius = Math.max(0.5, dotRadius - stroke);
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
-          ctx.fillStyle = color;
-          ctx.fill();
+        // Calculate number of rings based on spacing
+        const rings = Math.floor(maxRadius / currentSpacing);
+        const dotsPerRing = [1]; // Center dot
+
+        // Calculate dots per ring (roughly uniform distribution)
+        for (let ring = 1; ring <= rings; ring++) {
+          const circumference = 2 * Math.PI * ring * currentSpacing;
+          const dotsInRing = Math.max(
+            1,
+            Math.floor(circumference / currentSpacing),
+          );
+          dotsPerRing.push(dotsInRing);
+        }
+
+        // Draw center dot
+        const imageX = Math.floor(
+          (centerX / downloadSize) * hiddenCanvas.width,
+        );
+        const imageY = Math.floor(
+          (centerY / downloadSize) * hiddenCanvas.height,
+        );
+        const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
+
+        const r = data[pixelIndex] || 0;
+        const g = data[pixelIndex + 1] || 0;
+        const b = data[pixelIndex + 2] || 0;
+
+        const luminosity = getLuminosity(r, g, b);
+        const adjustedLuminosity = Math.min(
+          255,
+          Math.max(0, luminosity * levels),
+        );
+        const gammaAdjustedLuminosity =
+          Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
+        const normalizedLuminosity = gammaAdjustedLuminosity / 255;
+        const dotRadius =
+          (1 - normalizedLuminosity) * (currentDotSize / 2) * 0.65;
+
+        if (dotRadius > 0.5) {
+          // Center dot gets the highest ring index (innermost)
+          const ringIndex = rings + 1; // Higher than any actual ring
+          const { color, stroke, strokeColor } =
+            getColorForRadialRing(ringIndex);
+
+          if (stroke > 0) {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, dotRadius, 0, Math.PI * 2);
+            ctx.fillStyle = strokeColor;
+            ctx.fill();
+
+            const innerRadius = Math.max(0.5, dotRadius - stroke);
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+          } else {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, dotRadius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+          }
+        }
+
+        // Draw dots in rings
+        for (let ring = 1; ring <= rings; ring++) {
+          const ringRadius = ring * currentSpacing;
+          const dotsInRing = dotsPerRing[ring];
+
+          for (let dot = 0; dot < dotsInRing; dot++) {
+            const angle = (dot / dotsInRing) * 2 * Math.PI;
+            const x = centerX + Math.cos(angle) * ringRadius;
+            const y = centerY + Math.sin(angle) * ringRadius;
+
+            // Skip if outside canvas
+            if (x < 0 || x >= downloadSize || y < 0 || y >= downloadSize)
+              continue;
+
+            // Get pixel data from corresponding position in image
+            const imageX = Math.floor((x / downloadSize) * hiddenCanvas.width);
+            const imageY = Math.floor((y / downloadSize) * hiddenCanvas.height);
+            const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
+
+            const r = data[pixelIndex] || 0;
+            const g = data[pixelIndex + 1] || 0;
+            const b = data[pixelIndex + 2] || 0;
+
+            const luminosity = getLuminosity(r, g, b);
+            const adjustedLuminosity = Math.min(
+              255,
+              Math.max(0, luminosity * levels),
+            );
+            const gammaAdjustedLuminosity =
+              Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
+            const normalizedLuminosity = gammaAdjustedLuminosity / 255;
+            const dotRadius =
+              (1 - normalizedLuminosity) * (currentDotSize / 2) * 0.65;
+
+            if (dotRadius > 0.5) {
+              // Map ring number to ring index (ring 'rings' = outermost = index 0)
+              const ringIndex = rings - ring;
+              const { color, stroke, strokeColor } =
+                getColorForRadialRing(ringIndex);
+
+              if (stroke > 0) {
+                ctx.beginPath();
+                ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                ctx.fillStyle = strokeColor;
+                ctx.fill();
+
+                const innerRadius = Math.max(0.5, dotRadius - stroke);
+                ctx.beginPath();
+                ctx.arc(x, y, innerRadius, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+              } else {
+                ctx.beginPath();
+                ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+              }
+            }
+          }
+        }
+      } else {
+        // Original grid mode
+        if (isFullWidth) {
+          // Full-width grid mode - use entire canvas
+          const cols = Math.floor(downloadSize / currentSpacing);
+          const rows = Math.floor(downloadSize / currentSpacing);
+
+          // Debug logging
+          console.log(
+            `Full-width mode - Spacing: ${currentSpacing}, Cols: ${cols}, Rows: ${rows}, Total dots: ${
+              cols * rows
+            }`,
+          );
+
+          // Calculate offset to center the grid within the canvas
+          const totalGridWidth = (cols - 1) * currentSpacing;
+          const totalGridHeight = (rows - 1) * currentSpacing;
+          const gridOffsetX = (downloadSize - totalGridWidth) / 2;
+          const gridOffsetY = (downloadSize - totalGridHeight) / 2;
+
+          // Draw halftone dots across the entire canvas
+          for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+              const x = col * currentSpacing + gridOffsetX;
+              const y = row * currentSpacing + gridOffsetY;
+
+              // Get pixel data from corresponding position in image
+              const imageX = Math.floor((col / cols) * hiddenCanvas.width);
+              const imageY = Math.floor((row / rows) * hiddenCanvas.height);
+              const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
+
+              const r = data[pixelIndex] || 0;
+              const g = data[pixelIndex + 1] || 0;
+              const b = data[pixelIndex + 2] || 0;
+
+              // Calculate luminosity and dot size with levels and gamma adjustment
+              const luminosity = getLuminosity(r, g, b);
+              const adjustedLuminosity = Math.min(
+                255,
+                Math.max(0, luminosity * levels),
+              );
+              const gammaAdjustedLuminosity =
+                Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
+              const normalizedLuminosity = gammaAdjustedLuminosity / 255;
+              const dotRadius =
+                (1 - normalizedLuminosity) * (currentDotSize / 2) * 0.65;
+
+              if (dotRadius > 0.5) {
+                const { color, stroke, strokeColor } = getColorForRow(
+                  row,
+                  rows,
+                );
+
+                if (stroke > 0) {
+                  // Draw stroke color as outer circle
+                  ctx.beginPath();
+                  ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = strokeColor;
+                  ctx.fill();
+
+                  // Draw main color as inner circle
+                  const innerRadius = Math.max(0.5, dotRadius - stroke);
+                  ctx.beginPath();
+                  ctx.arc(x, y, innerRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = color;
+                  ctx.fill();
+                } else {
+                  // No stroke, just draw the main dot
+                  ctx.beginPath();
+                  ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = color;
+                  ctx.fill();
+                }
+              }
+            }
+          }
         } else {
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, dotRadius, 0, Math.PI * 2);
-          ctx.fillStyle = color;
-          ctx.fill();
-        }
-      }
+          // Bordered grid mode - use halftone area bounds (centered within canvas)
+          const halftoneX = (downloadSize - halftoneSize) / 2;
+          const halftoneY = (downloadSize - halftoneSize) / 2;
 
-      // Draw dots in rings
-      for (let ring = 1; ring <= rings; ring++) {
-        const ringRadius = ring * spacing;
-        const dotsInRing = dotsPerRing[ring];
+          // Calculate grid dimensions for the halftone area only
+          const cols = Math.floor(halftoneSize / currentSpacing);
+          const rows = Math.floor(halftoneSize / currentSpacing);
 
-        for (let dot = 0; dot < dotsInRing; dot++) {
-          const angle = (dot / dotsInRing) * 2 * Math.PI;
-          const x = centerX + Math.cos(angle) * ringRadius;
-          const y = centerY + Math.sin(angle) * ringRadius;
-
-          // Skip if outside canvas
-          if (x < 0 || x >= downloadSize || y < 0 || y >= downloadSize)
-            continue;
-
-          // Get pixel data from corresponding position in image
-          const imageX = Math.floor((x / downloadSize) * hiddenCanvas.width);
-          const imageY = Math.floor((y / downloadSize) * hiddenCanvas.height);
-          const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
-
-          const r = data[pixelIndex] || 0;
-          const g = data[pixelIndex + 1] || 0;
-          const b = data[pixelIndex + 2] || 0;
-
-          const luminosity = getLuminosity(r, g, b);
-          const adjustedLuminosity = Math.min(
-            255,
-            Math.max(0, luminosity * levels),
+          // Debug logging
+          console.log(
+            `Bordered mode - Spacing: ${currentSpacing}, Cols: ${cols}, Rows: ${rows}, Total dots: ${
+              cols * rows
+            }`,
           );
-          const gammaAdjustedLuminosity =
-            Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
-          const normalizedLuminosity = gammaAdjustedLuminosity / 255;
-          const dotRadius = (1 - normalizedLuminosity) * (dotSize / 2) * 0.65;
 
-          if (dotRadius > 0.5) {
-            // Map ring number to ring index (ring 'rings' = outermost = index 0)
-            const ringIndex = rings - ring;
-            const { color, stroke, strokeColor } =
-              getColorForRadialRing(ringIndex);
+          // Calculate offset to center the grid within the halftone area
+          const totalGridWidth = (cols - 1) * currentSpacing;
+          const totalGridHeight = (rows - 1) * currentSpacing;
+          const gridOffsetX = halftoneX + (halftoneSize - totalGridWidth) / 2;
+          const gridOffsetY = halftoneY + (halftoneSize - totalGridHeight) / 2;
 
-            if (stroke > 0) {
-              ctx.beginPath();
-              ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-              ctx.fillStyle = strokeColor;
-              ctx.fill();
+          // Draw halftone dots only within the halftone area
+          for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+              const x = col * currentSpacing + gridOffsetX;
+              const y = row * currentSpacing + gridOffsetY;
 
-              const innerRadius = Math.max(0.5, dotRadius - stroke);
-              ctx.beginPath();
-              ctx.arc(x, y, innerRadius, 0, Math.PI * 2);
-              ctx.fillStyle = color;
-              ctx.fill();
-            } else {
-              ctx.beginPath();
-              ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-              ctx.fillStyle = color;
-              ctx.fill();
+              // Get pixel data from corresponding position in image
+              const imageX = Math.floor((col / cols) * hiddenCanvas.width);
+              const imageY = Math.floor((row / rows) * hiddenCanvas.height);
+              const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
+
+              const r = data[pixelIndex] || 0;
+              const g = data[pixelIndex + 1] || 0;
+              const b = data[pixelIndex + 2] || 0;
+
+              // Calculate luminosity and dot size with levels and gamma adjustment
+              const luminosity = getLuminosity(r, g, b);
+              const adjustedLuminosity = Math.min(
+                255,
+                Math.max(0, luminosity * levels),
+              );
+              const gammaAdjustedLuminosity =
+                Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
+              const normalizedLuminosity = gammaAdjustedLuminosity / 255;
+              const dotRadius =
+                (1 - normalizedLuminosity) * (currentDotSize / 2) * 0.65;
+
+              if (dotRadius > 0.5) {
+                const { color, stroke, strokeColor } = getColorForRow(
+                  row,
+                  rows,
+                );
+
+                if (stroke > 0) {
+                  // Draw stroke color as outer circle
+                  ctx.beginPath();
+                  ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = strokeColor;
+                  ctx.fill();
+
+                  // Draw main color as inner circle
+                  const innerRadius = Math.max(0.5, dotRadius - stroke);
+                  ctx.beginPath();
+                  ctx.arc(x, y, innerRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = color;
+                  ctx.fill();
+                } else {
+                  // No stroke, just draw the main dot
+                  ctx.beginPath();
+                  ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                  ctx.fillStyle = color;
+                  ctx.fill();
+                }
+              }
             }
           }
         }
       }
-    } else {
-      // Original grid mode
-      // Calculate halftone area bounds (centered within canvas)
-      const halftoneX = (downloadSize - halftoneSize) / 2;
-      const halftoneY = (downloadSize - halftoneSize) / 2;
+    },
+    [
+      downloadSize,
+      isBlackBackground,
+      isRounded,
+      isFullWidth,
+      radialDotSize,
+      dotSize,
+      fullWidthGridDotSize,
+      gridDotSize,
+      radialSpacing,
+      spacing,
+      fullWidthGridSpacing,
+      gridSpacing,
+      levels,
+      gamma,
+      getLuminosity,
+      halftoneSize,
+    ],
+  );
 
-      // Calculate grid dimensions for the halftone area only
-      const cols = Math.floor(halftoneSize / spacing);
-      const rows = Math.floor(halftoneSize / spacing);
-
-      // Debug logging
-      console.log(
-        `Spacing: ${spacing}, Cols: ${cols}, Rows: ${rows}, Total dots: ${
-          cols * rows
-        }`,
-      );
-
-      // Calculate offset to center the grid within the halftone area
-      const totalGridWidth = (cols - 1) * spacing;
-      const totalGridHeight = (rows - 1) * spacing;
-      const gridOffsetX = halftoneX + (halftoneSize - totalGridWidth) / 2;
-      const gridOffsetY = halftoneY + (halftoneSize - totalGridHeight) / 2;
-
-      // Draw halftone dots only within the halftone area
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = col * spacing + gridOffsetX;
-          const y = row * spacing + gridOffsetY;
-
-          // Get pixel data from corresponding position in image
-          const imageX = Math.floor((col / cols) * hiddenCanvas.width);
-          const imageY = Math.floor((row / rows) * hiddenCanvas.height);
-          const pixelIndex = (imageY * hiddenCanvas.width + imageX) * 4;
-
-          const r = data[pixelIndex] || 0;
-          const g = data[pixelIndex + 1] || 0;
-          const b = data[pixelIndex + 2] || 0;
-
-          // Calculate luminosity and dot size with levels and gamma adjustment
-          const luminosity = getLuminosity(r, g, b);
-          const adjustedLuminosity = Math.min(
-            255,
-            Math.max(0, luminosity * levels),
-          );
-          const gammaAdjustedLuminosity =
-            Math.pow(adjustedLuminosity / 255, 1 / gamma) * 255;
-          const normalizedLuminosity = gammaAdjustedLuminosity / 255;
-          const dotRadius = (1 - normalizedLuminosity) * (dotSize / 2) * 0.65;
-
-          if (dotRadius > 0.5) {
-            const { color, stroke, strokeColor } = getColorForRow(row, rows);
-
-            if (stroke > 0) {
-              // Draw stroke color as outer circle
-              ctx.beginPath();
-              ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-              ctx.fillStyle = strokeColor;
-              ctx.fill();
-
-              // Draw main color as inner circle
-              const innerRadius = Math.max(0.5, dotRadius - stroke);
-              ctx.beginPath();
-              ctx.arc(x, y, innerRadius, 0, Math.PI * 2);
-              ctx.fillStyle = color;
-              ctx.fill();
-            } else {
-              // No stroke, just draw the main dot
-              ctx.beginPath();
-              ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-              ctx.fillStyle = color;
-              ctx.fill();
-            }
-          }
-        }
-      }
-    }
-  };
-
-  const handleImageLoad = (imageSrc: string) => {
-    const image = new Image();
-    image.crossOrigin = "anonymous";
-    image.onload = () => {
-      drawHalftone(image);
-    };
-    image.src = imageSrc;
-  };
+  const handleImageLoad = useCallback(
+    (imageSrc: string) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.onload = () => {
+        drawHalftone(image);
+      };
+      image.src = imageSrc;
+    },
+    [drawHalftone],
+  );
 
   const handleDownload = () => {
     if (!canvasRef.current) return;
@@ -455,6 +608,13 @@ export default function HalftoneImage({
     downloadSize,
     halftoneSize,
     isRounded,
+    isFullWidth,
+    radialDotSize,
+    radialSpacing,
+    gridDotSize,
+    gridSpacing,
+    isBlackBackground,
+    handleImageLoad,
   ]);
 
   // Global mouse event listeners for dragging outside canvas
@@ -502,7 +662,31 @@ export default function HalftoneImage({
   return (
     <div className="w-full">
       {!currentImage ? (
-        <div className="w-full aspect-square flex flex-col items-center justify-center bg-black/5 rounded-xl border-2 border-dashed border-black/20 p-8">
+        <div
+          className={`w-full aspect-square flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 transition-colors ${
+            isDragOver
+              ? "bg-blue-50 border-blue-400 border-solid"
+              : "bg-black/5 border-black/20"
+          }`}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragOver(true);
+          }}
+          onDragLeave={() => setIsDragOver(false)}
+          onDrop={(e) => {
+            e.preventDefault();
+            setIsDragOver(false);
+            const file = e.dataTransfer.files?.[0];
+            if (file && file.type.startsWith("image/")) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                const result = event.target?.result as string;
+                setCurrentImage(result);
+              };
+              reader.readAsDataURL(file);
+            }
+          }}
+        >
           <input
             type="file"
             accept="image/*"
@@ -547,22 +731,45 @@ export default function HalftoneImage({
               <Button
                 variant="flat"
                 color="default"
-                className="gap-2"
+                className="min-w-0 w-10 h-10 p-0 flex items-center justify-center"
                 startContent={<TbUpload size={18} />}
                 onClick={handleButtonClick}
-              >
-                Change
-              </Button>
+              ></Button>
               <Button
                 variant="flat"
                 color="default"
-                className="gap-2"
+                className="min-w-0 w-10 h-10 p-0 flex items-center justify-center"
                 startContent={
-                  isRounded ? <TbGrid3X3 size={18} /> : <TbCircle size={18} />
+                  isRounded ? (
+                    <TbGridDots size={18} />
+                  ) : (
+                    <BiLoaderCircle size={18} />
+                  )
                 }
                 onClick={() => setIsRounded(!isRounded)}
+              ></Button>
+              {!isRounded && (
+                <Button
+                  variant="flat"
+                  color="default"
+                  className="min-w-0 w-10 h-10 p-0 flex items-center justify-center"
+                  onClick={() => setIsFullWidth(!isFullWidth)}
+                >
+                  <TbArrowsMaximize size={16} />
+                </Button>
+              )}
+              <Button
+                variant="flat"
+                color="default"
+                className="min-w-0 w-10 h-10 p-0 flex items-center justify-center"
+                onClick={() => setIsBlackBackground(!isBlackBackground)}
               >
-                {isRounded ? "Grid" : "Radial"}
+                <div
+                  className="w-4 h-4 rounded-full border-1.5 border-current"
+                  style={{
+                    backgroundColor: isBlackBackground ? "#191919" : "#F9F9F9",
+                  }}
+                ></div>
               </Button>
               <Button
                 variant="flat"
@@ -574,19 +781,46 @@ export default function HalftoneImage({
                 Save
               </Button>
             </div>
-
-            <div className="flex items-center gap-4 text-sm text-black/60">
-              <span>Levels: {levels.toFixed(1)}</span>
-              <span>Gamma: {gamma.toFixed(1)}</span>
-              <span className="text-xs text-black/40">
-                {isDragging ? "Dragging..." : "Click & drag on image to adjust"}
+            <div className="flex items-center gap-1 text-sm text-black/60 bg-black/5 px-2 py-1.5 rounded-xl">
+              <div className="w-12 text-center leading-3">
+                <span className="text-xs text-black/40">Level</span>{" "}
+                {levels.toFixed(1)}
+              </div>
+              <div className="w-12 text-center leading-3">
+                <span className="text-xs text-black/40">Gamma</span>{" "}
+                {gamma.toFixed(1)}
+              </div>
+              <span className="text-xs leading-3 font-bold text-center text-[#FF00A4] w-20">
+                {isDragging ? "Dragging..." : "Drag on image to adjust"}
               </span>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden">
+          <div
+            className="rounded-xl overflow-hidden relative"
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDragOver(true);
+            }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setIsDragOver(false);
+              const file = e.dataTransfer.files?.[0];
+              if (file && file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const result = event.target?.result as string;
+                  setCurrentImage(result);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          >
             <canvas
               ref={canvasRef}
-              className="w-full h-auto aspect-square block cursor-crosshair"
+              className={`w-full h-auto aspect-square block transition-opacity ${
+                isDragOver ? "opacity-50" : "opacity-100"
+              }`}
               width={downloadSize}
               height={downloadSize}
               style={{
@@ -604,6 +838,16 @@ export default function HalftoneImage({
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             />
+            {isDragOver && (
+              <div className="absolute inset-0 flex items-center justify-center bg-blue-500/20 rounded-xl">
+                <div className="bg-white/90 rounded-lg p-4 text-center">
+                  <TbUpload size={32} className="mx-auto mb-2 text-blue-600" />
+                  <p className="text-sm font-medium text-blue-600">
+                    Drop image to replace
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
           <canvas
             ref={hiddenCanvasRef}

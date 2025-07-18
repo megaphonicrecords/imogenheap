@@ -137,7 +137,7 @@ export default function Navigation({
             <Button
               as={Link}
               color="secondary"
-              href="#"
+              href="https://heapster.id"
               variant="flat"
               className="p-3 gap-2 bg-gradient-to-b from-zinc-800 to-black text-[#D0E321]"
             >
