@@ -238,9 +238,9 @@ export default function Home() {
           Two coloured variants pressed on 45rpm double vinyl, protected by
           polylined inner sleeves. Packaged in a spot UV gatefold jacket with
           lyrics, poster, and redeemable digital Heapster badge. The 20th
-          anniversary remaster is avaliable for preorder now via Imogen Heap's
-          new shop, and will be rolling out to retail stores worldwide in the
-          coming days.
+          anniversary remaster is avaliable for preorder now via Imogen
+          Heap&apos;s new shop, and will be rolling out to retail stores
+          worldwide in the coming days.
         </p>
       </div>
       <div className="flex gap-2 mb-8 w-full justify-center">
