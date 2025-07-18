@@ -26,60 +26,14 @@ interface GlowBoxItem {
 const targetDate = new Date("2025-07-18T18:00:00+01:00");
 
 const LiveBadge = () => {
-  const [isLive, setIsLive] = useState(false);
-
-  useEffect(() => {
-    const checkLiveStatus = () => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-      const minutesLeft = Math.floor(difference / (1000 * 60));
-      setIsLive(minutesLeft <= 60); // Show "Live now" if within 60 minutes
-    };
-
-    checkLiveStatus();
-    const timer = setInterval(checkLiveStatus, 60000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <div
-      className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium text-white backdrop-blur-sm ${
-        isLive ? "bg-black/25" : "bg-black/25"
-      }`}
-    >
-      {isLive ? "Waiting for Imogen…" : "Preparing…"}
+    <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium text-white backdrop-blur-sm bg-[#FF00A4]/80">
+      LIVE NOW
     </div>
   );
 };
 
 const CountdownText = () => {
-  const [timeLeft, setTimeLeft] = useState<string>("with us...");
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference <= 0) {
-        setTimeLeft("now");
-        return;
-      }
-
-      const minutes = Math.floor(difference / (1000 * 60));
-      if (minutes < 60) {
-        setTimeLeft(`in ${minutes} minute${minutes !== 1 ? "s" : ""}`);
-      } else {
-        const hours = Math.floor(minutes / 60);
-        setTimeLeft(`in ${hours} hour${hours !== 1 ? "s" : ""}`);
-      }
-    };
-
-    calculateTimeLeft(); // Initial calculation
-    const timer = setInterval(calculateTimeLeft, 60000); // Update every minute
-
-    return () => clearInterval(timer);
-  }, []);
-
   return <span>Celebration live stream</span>;
 };
 
@@ -291,8 +245,11 @@ export default function Home() {
               Your browser does not support the video tag.
             </video>
             <LiveBadge />
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center cursor-pointer"
+            <motion.a
+              href="https://www.youtube.com/live/D36LdUrr1U0"
+              className="absolute inset-0 flex items-center justify-center"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover="hover"
               whileTap="tap"
               initial="initial"
@@ -333,28 +290,18 @@ export default function Home() {
                     },
                   }}
                 >
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  >
-                    <BiLoaderCircle size={24} />
-                  </motion.div>
+                  <FaPlay className="ml-1" size={24} />
                 </motion.div>
               </motion.div>
-            </motion.div>
+            </motion.a>
           </div>
           <p className="mt-4 text-sm text-left w-fit bg-gradient-to-r from-[rgba(255,0,164,0.25)] to-transparent">
             <CountdownText />
           </p>
           <p className="text-left font-light text-sm mt-4">
-            To celebrate the 20th anniversary, Imogen will be streaming across
-            all platforms, and you can chat in a virtual room with her;
-            exclusive to the new Heapster Live platform launching today. Sign up
-            now to join at 6pm UK.
+            To celebrate the 20th anniversary, Imogen is streaming live across
+            all platforms. Click the play button to watch the celebration live
+            stream on YouTube now!
           </p>
         </div>
 
