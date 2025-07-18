@@ -80,7 +80,7 @@ const CountdownText = () => {
     return () => clearInterval(timer);
   }, []);
 
-  return <span>Starting shortly, please check back soon.</span>;
+  return <span>Celebration live stream</span>;
 };
 
 // GlowBox data configuration
