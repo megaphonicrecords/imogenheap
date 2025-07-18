@@ -10,6 +10,8 @@ import { TbPhotoPlus } from "react-icons/tb";
 import HalftoneDialog from "./components/HalftoneDialog";
 import { BiSolidAlbum } from "react-icons/bi";
 import { PiButterflyFill } from "react-icons/pi";
+import { BiLoaderCircle } from "react-icons/bi";
+
 // TypeScript interface for glowBox data
 interface GlowBoxItem {
   href: string;
@@ -112,7 +114,7 @@ const glowBoxData: GlowBoxItem[] = [
     ),
   },
   {
-    href: "https://heapster.live",
+    href: "https://imogenheap.com",
     icon: "/heapsterlive-square.png",
     iconAlt: "ai.mogen icon",
     title: "Heapster Live",
@@ -121,7 +123,7 @@ const glowBoxData: GlowBoxItem[] = [
       <>
         <b>Connect with Heapsters and talk live with Imogen and Mogen.</b> Login
         with your Heapster ID and join the community of fans and likeminded
-        people.
+        people. Launching later today.
       </>
     ),
   },
@@ -233,10 +235,12 @@ export default function Home() {
           Preorder the limited edition 2×LP
         </p>
         <p className="text-left font-light text-sm mt-4">
-          The 20th anniversary remaster is avaliable for preorder now. Two
-          coloured variants pressed on 45rpm double vinyl, protected by
+          Two coloured variants pressed on 45rpm double vinyl, protected by
           polylined inner sleeves. Packaged in a spot UV gatefold jacket with
-          lyrics, poster, and redeemable digital Heapster badge.
+          lyrics, poster, and redeemable digital Heapster badge. The 20th
+          anniversary remaster is avaliable for preorder now via Imogen Heap's
+          new shop, and will be rolling out to retail stores worldwide in the
+          coming days.
         </p>
       </div>
       <div className="flex gap-2 mb-8 w-full justify-center">
@@ -287,11 +291,8 @@ export default function Home() {
               Your browser does not support the video tag.
             </video>
             <LiveBadge />
-            <motion.a
-              href="https://heapster.live"
-              className="absolute inset-0 flex items-center justify-center"
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center cursor-pointer"
               whileHover="hover"
               whileTap="tap"
               initial="initial"
@@ -332,10 +333,19 @@ export default function Home() {
                     },
                   }}
                 >
-                  <FaPlay className="ml-1" size={24} />
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
+                    <BiLoaderCircle size={24} />
+                  </motion.div>
                 </motion.div>
               </motion.div>
-            </motion.a>
+            </motion.div>
           </div>
           <p className="mt-4 text-sm text-left w-fit bg-gradient-to-r from-[rgba(255,0,164,0.25)] to-transparent">
             <CountdownText />

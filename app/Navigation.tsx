@@ -29,6 +29,7 @@ export default function Navigation({
 }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
+  const [isHeapsterIDOpen, setIsHeapsterIDOpen] = React.useState(false);
   const pathname = usePathname();
 
   return (
@@ -135,11 +136,10 @@ export default function Navigation({
         <NavbarContent justify="end" className="gap-4 hidden sm:flex">
           <NavbarItem>
             <Button
-              as={Link}
               color="secondary"
-              href="https://heapster.id"
               variant="flat"
               className="p-3 gap-2 bg-gradient-to-b from-zinc-800 to-black text-[#D0E321]"
+              onPress={() => setIsHeapsterIDOpen(true)}
             >
               <Image
                 src="/heapsterid-icon.svg"
@@ -163,6 +163,38 @@ export default function Navigation({
         <ModalContent>
           <ModalBody className="p-0">
             <Newsletter />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      <Modal
+        isOpen={isHeapsterIDOpen}
+        onOpenChange={setIsHeapsterIDOpen}
+        size="md"
+        backdrop="blur"
+        className="bg-black"
+      >
+        <ModalContent>
+          <ModalBody className="p-8 text-center">
+            <div className="flex flex-col items-center">
+              <Image
+                src="/heapsterid.svg"
+                alt="HeapsterID"
+                width={48}
+                height={48}
+                className="mb-4"
+              />
+              <Image
+                src="/heapsterid-wordmark.svg"
+                alt="HeapsterID"
+                width={150}
+                height={150}
+                className="mb-4"
+              />{" "}
+              <p className="text-[#d0e321] text-sm">
+                You'll be able to access this later today.
+              </p>
+            </div>
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="51px" viewBox="0 0 52 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 2</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#242424" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-480, -680)">
+            <g id="Group-2" transform="translate(480.5, 680)">
+                <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="51" height="51" rx="12"></rect>
+                <ellipse id="Oval" fill="#D0E321" cx="16.5" cy="13" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#859300" fill="#D0E321" cx="16.5" cy="19" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#D0E321" cx="34.5" cy="13" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#859300" fill="#D0E321" cx="34.5" cy="19" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#859300" cx="25.5" cy="24" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#606A00" fill="#859300" cx="25.5" cy="30" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" stroke="#606A00" fill="#859300" cx="11.5" cy="35" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#606A00" cx="17.5" cy="39" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#606A00" cx="25.5" cy="39" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#606A00" cx="33.5" cy="39" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#606A00" fill="#859300" cx="40.5" cy="36" rx="3.5" ry="2.5"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
