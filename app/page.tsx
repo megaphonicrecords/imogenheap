@@ -246,7 +246,7 @@ export default function Home() {
       <div className="flex gap-2 mb-8 w-full justify-center">
         <Button
           as={Link}
-          href="https://shop.imogenheap.com/release/517814-imogen-heap-speak-for-yourself-20th-anniversary-remaster"
+          href="https://shop.imogenheap.com"
           variant="flat"
           className="gap-2 bg-black/25 hover:bg-black/20 transition-colors duration-300 text-black"
         >
@@ -255,7 +255,7 @@ export default function Home() {
         <Button
           as={Link}
           color="secondary"
-          href="https://shop.imogenheap.com/release/517814-imogen-heap-speak-for-yourself-20th-anniversary-remaster"
+          href="https://shop.imogenheap.com"
           variant="flat"
           className="gap-2"
         >
