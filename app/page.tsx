@@ -246,7 +246,7 @@ export default function Home() {
             </video>
             <LiveBadge />
             <motion.a
-              href="https://www.youtube.com/watch?v=t37x4SHnwYA"
+              href="https://youtube.com/live/n0lsxlHCxrU"
               className="absolute inset-0 flex items-center justify-center"
               target="_blank"
               rel="noopener noreferrer"
