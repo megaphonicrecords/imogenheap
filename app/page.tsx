@@ -44,10 +44,10 @@ const LiveBadge = () => {
   return (
     <div
       className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium text-white backdrop-blur-sm ${
-        isLive ? "bg-[#FF00A4]/70" : "bg-black/25"
+        isLive ? "bg-black/25" : "bg-black/25"
       }`}
     >
-      {isLive ? "Live" : "Preparing…"}
+      {isLive ? "Waiting for Imogen…" : "Preparing…"}
     </div>
   );
 };
@@ -80,7 +80,7 @@ const CountdownText = () => {
     return () => clearInterval(timer);
   }, []);
 
-  return <span>Celebrate live {timeLeft}</span>;
+  return <span>Starting shortly, please check back soon.</span>;
 };
 
 // GlowBox data configuration
