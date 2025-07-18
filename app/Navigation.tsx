@@ -34,7 +34,7 @@ function Countdown() {
   const [seconds, setSeconds] = React.useState<number | null>(null);
 
   React.useEffect(() => {
-    const targetTime = 1752840000 * 1000; // Convert to milliseconds
+    const targetTime = 1752836400 * 1000; // Convert to milliseconds (1pm UK instead of 2pm)
 
     const updateCountdown = (): void => {
       const now = Date.now();
