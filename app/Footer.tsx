@@ -123,7 +123,7 @@ const Footer = () => {
           Privacy & Terms
         </Link>
         <Link
-          href="mailto:info@imogenheap.com"
+          onPress={onContactModalOpen}
           className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Contact
@@ -394,27 +394,54 @@ const Footer = () => {
                   Contact
                 </ModalHeader>
                 <ModalBody>
-                  <Input
-                    className="font-extralight"
-                    label="Email"
-                    variant="bordered"
-                  />
-                  <Textarea
-                    label="Message"
-                    variant="bordered"
-                    className="font-extralight"
-                  />
-                  <p className="flex flex-col gap-1 text-sm font-extralight">
-                    Your message will be sent automatically to the relevant
-                    team. Alternatively, you can email info@imogenheap.com.
-                  </p>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Artist</h3>
+                      <p className="text-sm font-extralight">
+                        info@imogenheap.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Label</h3>
+                      <p className="text-sm font-extralight">
+                        label@megaphonicrecords.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Distributor</h3>
+                      <p className="text-sm font-extralight">
+                        kevinhopper@symdistro.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Press US</h3>
+                      <p className="text-sm font-extralight">
+                        sarah.avrin@charmschoolmedia.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Press UK</h3>
+                      <p className="text-sm font-extralight">
+                        caroline@yesplease.fm
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Website</h3>
+                      <p className="text-sm font-extralight">
+                        jacob@imogenheap.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Webshop</h3>
+                      <p className="text-sm font-extralight">
+                        support@ochre.store
+                      </p>
+                    </div>
+                  </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="flat" onPress={onClose}>
-                    Cancel
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Send
+                  <Button color="secondary" variant="flat" onPress={onClose}>
+                    Close
                   </Button>
                 </ModalFooter>
               </>
