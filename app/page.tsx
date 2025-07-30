@@ -244,7 +244,6 @@ export default function Home() {
               <source src="/videos/sfy-loader.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <LiveBadge />
             <motion.a
               href="https://youtube.com/live/n0lsxlHCxrU"
               className="absolute inset-0 flex items-center justify-center"
