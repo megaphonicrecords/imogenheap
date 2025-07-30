@@ -422,7 +422,7 @@ const Footer = () => {
                     <div className="space-y-2">
                       <h3 className="font-semibold text-sm">Press UK</h3>
                       <p className="text-sm font-extralight">
-                        media@imogenheap.com
+                        media@megaphonicrecords.com
                       </p>
                     </div>
                     <div className="space-y-2">
