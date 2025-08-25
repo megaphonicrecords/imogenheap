@@ -106,7 +106,7 @@ export default function HalftoneImage({
     // Follow exact same pattern as grid rows, but starting from outside
     if (ringIndex < 4) {
       // First 4 rings: green
-      return { color: "#D0E321", stroke: 0, strokeColor: "#3b82f6" };
+      return { color: "#D0E321", stroke: 0, strokeColor: "#0191C0" };
     } else if (ringIndex === 4) {
       // Ring 4: green with small blue stroke
       return { color: "#D0E321", stroke: 2, strokeColor: "#0191C0" };
@@ -826,17 +826,63 @@ export default function HalftoneImage({
                 Save
               </Button>
             </div>
-            <div className="flex items-center gap-1 text-sm text-black bg-black/5 px-3 py-2 rounded-xl h-[40px]">
+            <div className="flex items-center gap-4 text-sm text-black bg-black/5 px-3 py-2 rounded-xl h-[40px]">
               <div className="w-12 text-center leading-3">
                 <div>
                   <span>L</span>
                   {levels.toFixed(1)}
                 </div>
-                <div className="w-full h-1 bg-white rounded-full mt-1 overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#ff00a4] to-[#cfe321] rounded-full transition-all duration-200"
-                    style={{ width: `${100 - ((levels - 0.1) / 1.9) * 100}%` }}
-                  />
+                <div className="flex justify-center gap-1 mt-1">
+                  {[0, 1, 2].map((dotIndex) => {
+                    const levelRange = 2.0 - 0.1; // 1.9
+                    const dotRange = levelRange / 3; // 0.633 per dot
+                    const currentValue = levels - 0.1; // Normalize to 0-1.9
+                    const activeDots = Math.min(
+                      2,
+                      Math.floor(currentValue / dotRange),
+                    );
+                    const isActive = currentValue > 0 && dotIndex <= activeDots;
+                    const isCurrentDot = dotIndex === activeDots;
+                    const progressInCurrentDot = isCurrentDot
+                      ? Math.min(
+                          1,
+                          (currentValue - activeDots * dotRange) / dotRange,
+                        )
+                      : 0;
+                    const strokeWidth = isActive
+                      ? currentValue === 0
+                        ? 0
+                        : isCurrentDot
+                        ? Math.max(
+                            0.5,
+                            Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
+                          )
+                        : 2.5
+                      : 0;
+
+                    return (
+                      <div
+                        key={dotIndex}
+                        className="relative w-3 h-3 rounded-full transition-all duration-200 flex items-center justify-center"
+                        style={{
+                          backgroundColor: isActive ? "#000" : "#0191C0",
+                        }}
+                      >
+                        <div
+                          className="w-3 h-3 rounded-full transition-all duration-200"
+                          style={{
+                            backgroundColor:
+                              strokeWidth > 0 ? "#0191C0" : "transparent",
+                            transform: `scale(${
+                              strokeWidth > 0
+                                ? Math.max(0.001, 1 - strokeWidth * 0.48)
+                                : 1
+                            })`,
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="w-12 text-center leading-3">
@@ -844,16 +890,59 @@ export default function HalftoneImage({
                   <span>G</span>
                   {gamma.toFixed(1)}
                 </div>
-                <div className="w-full h-1 bg-white rounded-full mt-1 overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#cfe321] to-[#0491c0] rounded-full transition-all duration-200"
-                    style={{ width: `${100 - ((gamma - 0.1) / 2.9) * 100}%` }}
-                  />
+                <div className="flex justify-center gap-1 mt-1">
+                  {[0, 1, 2].map((dotIndex) => {
+                    const gammaRange = 3.0 - 0.1; // 2.9
+                    const dotRange = gammaRange / 3; // 0.966 per dot
+                    const currentValue = gamma - 0.1; // Normalize to 0-2.9
+                    const activeDots = Math.min(
+                      2,
+                      Math.floor(currentValue / dotRange),
+                    );
+                    const isActive = currentValue > 0 && dotIndex <= activeDots;
+                    const isCurrentDot = dotIndex === activeDots;
+                    const progressInCurrentDot = isCurrentDot
+                      ? Math.min(
+                          1,
+                          (currentValue - activeDots * dotRange) / dotRange,
+                        )
+                      : 0;
+                    const strokeWidth = isActive
+                      ? currentValue === 0
+                        ? 0
+                        : isCurrentDot
+                        ? Math.max(
+                            0.5,
+                            Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
+                          )
+                        : 2.5
+                      : 0;
+
+                    return (
+                      <div
+                        key={dotIndex}
+                        className="relative w-3 h-3 rounded-full transition-all duration-200 flex items-center justify-center"
+                        style={{
+                          backgroundColor: isActive ? "#ff00a4" : "#cfe321",
+                        }}
+                      >
+                        <div
+                          className="w-full h-full rounded-full transition-all duration-200"
+                          style={{
+                            backgroundColor:
+                              strokeWidth > 0 ? "#cfe321" : "transparent",
+                            transform: `scale(${
+                              strokeWidth > 0
+                                ? Math.max(0.001, 1 - strokeWidth * 0.48)
+                                : 1
+                            })`,
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-              <span className="text-xs leading-3 text-center text-black/40 w-20">
-                {isDragging ? "Dragging..." : "Drag on image to adjust"}
-              </span>
             </div>
           </div>
           <div
