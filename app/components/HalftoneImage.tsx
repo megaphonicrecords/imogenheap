@@ -52,15 +52,15 @@ export default function HalftoneImage({
 
   // Use specific values for each mode, fallback to general props, then defaults
   const currentDotSize = isRounded
-    ? (radialDotSize ?? dotSize)
+    ? radialDotSize ?? dotSize
     : isFullWidth
-      ? (fullWidthGridDotSize ?? gridDotSize ?? dotSize)
-      : (gridDotSize ?? dotSize);
+    ? fullWidthGridDotSize ?? gridDotSize ?? dotSize
+    : gridDotSize ?? dotSize;
   const currentSpacing = isRounded
-    ? (radialSpacing ?? spacing)
+    ? radialSpacing ?? spacing
     : isFullWidth
-      ? (fullWidthGridSpacing ?? gridSpacing ?? spacing)
-      : (gridSpacing ?? spacing);
+    ? fullWidthGridSpacing ?? gridSpacing ?? spacing
+    : gridSpacing ?? spacing;
 
   const getColorForRow = (row: number, totalRows: number) => {
     // Top 4 rows: green
@@ -765,7 +765,7 @@ export default function HalftoneImage({
       ) : (
         <>
           <div className="bg-black/5 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <input
                 type="file"
                 accept="image/*"
@@ -810,32 +810,48 @@ export default function HalftoneImage({
                 onClick={() => setIsBlackBackground(!isBlackBackground)}
               >
                 <div
-                  className="w-4 h-4 rounded-full border-1.5 border-current"
+                  className="w-4 h-4 rounded-full"
                   style={{
-                    backgroundColor: isBlackBackground ? "#191919" : "#F9F9F9",
+                    backgroundColor: isBlackBackground ? "#000000" : "#ffffff",
                   }}
                 ></div>
               </Button>
               <Button
                 variant="flat"
-                color="success"
-                className="gap-2"
+                color="default"
+                className="gap-1 px-0"
                 onClick={handleDownload}
                 startContent={<TbDownload size={18} />}
               >
                 Save
               </Button>
             </div>
-            <div className="flex items-center gap-1 text-sm text-black/60 bg-black/5 px-2 py-1.5 rounded-xl">
+            <div className="flex items-center gap-1 text-sm text-black bg-black/5 px-3 py-2 rounded-xl h-[40px]">
               <div className="w-12 text-center leading-3">
-                <span className="text-xs text-black/40">Level</span>{" "}
-                {levels.toFixed(1)}
+                <div>
+                  <span>L</span>
+                  {levels.toFixed(1)}
+                </div>
+                <div className="w-full h-1 bg-white rounded-full mt-1 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#ff00a4] to-[#cfe321] rounded-full transition-all duration-200"
+                    style={{ width: `${100 - ((levels - 0.1) / 1.9) * 100}%` }}
+                  />
+                </div>
               </div>
               <div className="w-12 text-center leading-3">
-                <span className="text-xs text-black/40">Gamma</span>{" "}
-                {gamma.toFixed(1)}
+                <div>
+                  <span>G</span>
+                  {gamma.toFixed(1)}
+                </div>
+                <div className="w-full h-1 bg-white rounded-full mt-1 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#cfe321] to-[#0491c0] rounded-full transition-all duration-200"
+                    style={{ width: `${100 - ((gamma - 0.1) / 2.9) * 100}%` }}
+                  />
+                </div>
               </div>
-              <span className="text-xs leading-3 font-bold text-center text-[#FF00A4] w-20">
+              <span className="text-xs leading-3 text-center text-black/40 w-20">
                 {isDragging ? "Dragging..." : "Drag on image to adjust"}
               </span>
             </div>
@@ -863,8 +879,8 @@ export default function HalftoneImage({
           >
             <canvas
               ref={canvasRef}
-              className={`w-full h-auto aspect-square block transition-opacity ${
-                isDragOver ? "opacity-50" : "opacity-100"
+              className={`w-full h-auto aspect-square block transition-opacity cursor-grab active:cursor-grabbing  ${
+                isDragOver ? "opacity-50 " : "opacity-100"
               }`}
               width={downloadSize}
               height={downloadSize}
