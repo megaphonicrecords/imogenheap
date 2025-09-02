@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
       to: [toEmail],
       subject,
       html,
-      reply_to: replyTo,
+      ...(replyTo ? { replyTo } : {}),
     });
 
     return NextResponse.json({ success: true });
