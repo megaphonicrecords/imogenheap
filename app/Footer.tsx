@@ -134,12 +134,6 @@ const Footer = () => {
         >
           Contact
         </Link>
-        <Link
-          onPress={onMediaModalOpen}
-          className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer ml-3"
-        >
-          Media Request
-        </Link>
       </div>
       <>
         <Modal
