@@ -314,8 +314,8 @@ export default function MediaRequestForm({
             </Select>
             <p className="mt-1 text-xs text-gray-600">
               Please note: all social media will need to be pre-approved before
-              public release and the use of Imogen's social media for promotion
-              of the interview is not guaranteed.
+              public release and the use of Imogen&apos;s social media for
+              promotion of the interview is not guaranteed.
             </p>
           </div>
           <div>
@@ -333,7 +333,7 @@ export default function MediaRequestForm({
           <div>
             <Label htmlFor="allowTranscriptForAI">
               Can the transcript from the interview be made available for the
-              training of Imogen's personal AI, Mogen?
+              training of Imogen&apos;s personal AI, Mogen?
             </Label>
             <Select
               id="allowTranscriptForAI"
