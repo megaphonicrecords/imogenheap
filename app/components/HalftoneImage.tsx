@@ -52,15 +52,15 @@ export default function HalftoneImage({
 
   // Use specific values for each mode, fallback to general props, then defaults
   const currentDotSize = isRounded
-    ? radialDotSize ?? dotSize
+    ? (radialDotSize ?? dotSize)
     : isFullWidth
-    ? fullWidthGridDotSize ?? gridDotSize ?? dotSize
-    : gridDotSize ?? dotSize;
+      ? (fullWidthGridDotSize ?? gridDotSize ?? dotSize)
+      : (gridDotSize ?? dotSize);
   const currentSpacing = isRounded
-    ? radialSpacing ?? spacing
+    ? (radialSpacing ?? spacing)
     : isFullWidth
-    ? fullWidthGridSpacing ?? gridSpacing ?? spacing
-    : gridSpacing ?? spacing;
+      ? (fullWidthGridSpacing ?? gridSpacing ?? spacing)
+      : (gridSpacing ?? spacing);
 
   const getColorForRow = (row: number, totalRows: number) => {
     // Top 4 rows: green
@@ -853,11 +853,11 @@ export default function HalftoneImage({
                       ? currentValue === 0
                         ? 0
                         : isCurrentDot
-                        ? Math.max(
-                            0.5,
-                            Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
-                          )
-                        : 2.5
+                          ? Math.max(
+                              0.5,
+                              Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
+                            )
+                          : 2.5
                       : 0;
 
                     return (
@@ -911,11 +911,11 @@ export default function HalftoneImage({
                       ? currentValue === 0
                         ? 0
                         : isCurrentDot
-                        ? Math.max(
-                            0.5,
-                            Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
-                          )
-                        : 2.5
+                          ? Math.max(
+                              0.5,
+                              Math.min(2.5, progressInCurrentDot * 1.5 + 0.5),
+                            )
+                          : 2.5
                       : 0;
 
                     return (

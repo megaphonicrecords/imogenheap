@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import MediaRequestForm from "./components/MediaRequestForm";
 import {
   Textarea,
   Link,
@@ -30,6 +31,11 @@ const Footer = () => {
     isOpen: isPrivacyModalOpen,
     onOpen: onPrivacyModalOpen,
     onClose: onPrivacyModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isMediaModalOpen,
+    onOpen: onMediaModalOpen,
+    onClose: onMediaModalClose,
   } = useDisclosure();
   const {
     isOpen: isContactModalOpen,
@@ -127,6 +133,12 @@ const Footer = () => {
           className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Contact
+        </Link>
+        <Link
+          onPress={onMediaModalOpen}
+          className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer ml-3"
+        >
+          Media Request
         </Link>
       </div>
       <>
@@ -385,7 +397,7 @@ const Footer = () => {
         <Modal
           isOpen={isContactModalOpen}
           onClose={onContactModalClose}
-          placement="center"
+          scrollBehavior="outside"
         >
           <ModalContent className="pt-1 pb-2">
             {(onClose) => (
@@ -414,16 +426,16 @@ const Footer = () => {
                       </p>
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-sm">Press US</h3>
-                      <p className="text-sm font-extralight">
-                        sarah.avrin@charmschoolmedia.com
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-sm">Press UK</h3>
-                      <p className="text-sm font-extralight">
-                        media@megaphonicrecords.com
-                      </p>
+                      <h3 className="font-semibold text-sm">Media & Press</h3>
+                      <Link
+                        className="underline text-sm font-extralight text-foreground decoration-dotted underline-offset-6 hover:decoration-solid cursor-pointer"
+                        onPress={() => {
+                          onContactModalClose();
+                          onMediaModalOpen();
+                        }}
+                      >
+                        Open request Form
+                      </Link>
                     </div>
                     <div className="space-y-2">
                       <h3 className="font-semibold text-sm">Website</h3>
@@ -449,6 +461,29 @@ const Footer = () => {
           </ModalContent>
         </Modal>
       </>
+      <Modal
+        isOpen={isMediaModalOpen}
+        onClose={onMediaModalClose}
+        scrollBehavior="outside"
+      >
+        <ModalContent className="pt-1 pb-2">
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1 text-sm">
+                Interview Request Form
+              </ModalHeader>
+              <ModalBody>
+                <MediaRequestForm onSubmitted={onMediaModalClose} />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="secondary" variant="flat" onPress={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </footer>
   );
 };
