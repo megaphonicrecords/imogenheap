@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { Inconsolata } from "next/font/google";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "./Footer";
-import Navigation from "./Navigation";
-import { Providers } from "./providers";
+import ClientLayout from "./ClientLayout";
+import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const font = Inconsolata({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Imogen Heap",
   description: "Imogen Heap official website and portal.",
+  other: {
+    "font-preload": "/fonts/immi.ttf",
+  },
 };
 
 export default function RootLayout({
@@ -19,16 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="min-h-screen justify-center items-center light">
       <body className={font.className}>
-        <Providers>
-          <main className="min-h-screen flex-col items-center justify-between px-6 sm:px-12 md:px-24 lg:px-0 lg:max-w-4xl mx-auto">
-            <Navigation />
-            {children}
-          </main>
-          <Footer />
-        </Providers>
+        <ClientLayout>{children}</ClientLayout>
       </body>
+      <GoogleAnalytics gaId="G-GKM5QWJG2G" />
+      <Analytics />
     </html>
   );
 }

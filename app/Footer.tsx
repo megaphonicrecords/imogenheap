@@ -1,11 +1,9 @@
 "use client";
 
 import React from "react";
+import MediaRequestForm from "./components/MediaRequestForm";
 import {
-  Textarea,
   Link,
-  Checkbox,
-  Input,
   Modal,
   ModalContent,
   ModalHeader,
@@ -24,13 +22,17 @@ import {
 } from "react-icons/fa6";
 import { SiApplemusic } from "react-icons/si";
 import { BsPassportFill } from "react-icons/bs";
-import { RxEnvelopeClosed, RxPencil2 } from "react-icons/rx";
 
 const Footer = () => {
   const {
     isOpen: isPrivacyModalOpen,
     onOpen: onPrivacyModalOpen,
     onClose: onPrivacyModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isMediaModalOpen,
+    onOpen: onMediaModalOpen,
+    onClose: onMediaModalClose,
   } = useDisclosure();
   const {
     isOpen: isContactModalOpen,
@@ -92,7 +94,7 @@ const Footer = () => {
           <FaBandcamp />
         </a>
         <a
-          href="https://prerelease.creativepassport.net/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
+          href="https://id.auracles.io/page/6113890d-f6db-4b4d-838a-f811d60f4409/977a55e6-6e35-4dab-9400-923626f06545"
           rel="noopener noreferrer"
           className="hover:text-foreground"
         >
@@ -100,25 +102,36 @@ const Footer = () => {
         </a>
       </div>
       <div className="container mx-auto mt-4">
+        <span className="text-zinc-600 text-center text-sm font-light mr-2">
+          &copy; {currentYear}{" "}
+          <Link
+            href="https://megaphonicrecords.com/"
+            className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
+          >
+            Megaphonic
+          </Link>
+          . Website powered by{" "}
+          <Link
+            href="https://auracles.io"
+            className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
+          >
+            Auracles
+          </Link>
+          .
+        </span>
         <Link
           onPress={onPrivacyModalOpen}
-          className="text-foreground mr-4 text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-zinc-600 mr-3 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Privacy & Terms
         </Link>
         <Link
           onPress={onContactModalOpen}
-          className="text-foreground text-sm font-extralight hover:font-normal dotLink cursor-pointer"
+          className="text-zinc-600 text-sm font-light hover:font-normal dotLink cursor-pointer"
         >
           Contact
         </Link>
       </div>
-      <div className="container mx-auto mt-4">
-        <p className="text-zinc-600 text-center text-sm font-light">
-          &copy; {currentYear} Megaphonic
-        </p>
-      </div>
-
       <>
         <Modal
           isOpen={isPrivacyModalOpen}
@@ -375,7 +388,7 @@ const Footer = () => {
         <Modal
           isOpen={isContactModalOpen}
           onClose={onContactModalClose}
-          placement="center"
+          scrollBehavior="outside"
         >
           <ModalContent className="pt-1 pb-2">
             {(onClose) => (
@@ -384,27 +397,60 @@ const Footer = () => {
                   Contact
                 </ModalHeader>
                 <ModalBody>
-                  <Input
-                    className="font-extralight"
-                    label="Email"
-                    variant="bordered"
-                  />
-                  <Textarea
-                    label="Message"
-                    variant="bordered"
-                    className="font-extralight"
-                  />
-                  <p className="flex flex-col gap-1 text-sm font-extralight">
-                    Your message will be sent automatically to the relevant
-                    team. Alternatively, you can email info@imogenheap.com.
-                  </p>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Artist</h3>
+                      <p className="text-sm font-extralight">
+                        info@imogenheap.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Label</h3>
+                      <p className="text-sm font-extralight">
+                        label@megaphonicrecords.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Distributor</h3>
+                      <p className="text-sm font-extralight">
+                        kevinhopper@symdistro.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">US Press</h3>
+                      <p className="text-sm font-extralight">
+                        sarah.avrin@charmschoolmedia.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Worldwide Press</h3>
+                      <Link
+                        className="underline text-sm font-extralight text-foreground decoration-dotted underline-offset-6 hover:decoration-solid cursor-pointer"
+                        onPress={() => {
+                          onContactModalClose();
+                          onMediaModalOpen();
+                        }}
+                      >
+                        Send media request
+                      </Link>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Website</h3>
+                      <p className="text-sm font-extralight">
+                        jacob@imogenheap.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Webshop</h3>
+                      <p className="text-sm font-extralight">
+                        support@ochre.store
+                      </p>
+                    </div>
+                  </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="flat" onPress={onClose}>
-                    Cancel
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Send
+                  <Button color="secondary" variant="flat" onPress={onClose}>
+                    Close
                   </Button>
                 </ModalFooter>
               </>
@@ -412,6 +458,29 @@ const Footer = () => {
           </ModalContent>
         </Modal>
       </>
+      <Modal
+        isOpen={isMediaModalOpen}
+        onClose={onMediaModalClose}
+        scrollBehavior="outside"
+      >
+        <ModalContent className="pt-1 pb-2">
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1 text-sm">
+                Interview Request Form
+              </ModalHeader>
+              <ModalBody>
+                <MediaRequestForm onSubmitted={onMediaModalClose} />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="secondary" variant="flat" onPress={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </footer>
   );
 };

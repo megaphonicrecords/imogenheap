@@ -1,0 +1,251 @@
+"use client";
+
+import { Button, Input, Card, CardHeader, CardBody } from "@nextui-org/react";
+import { useState, useEffect } from "react";
+
+export default function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    // Load Brevo script
+    const script = document.createElement("script");
+    script.src = "https://sibforms.com/forms/end-form/build/main.js";
+    script.defer = true;
+    document.body.appendChild(script);
+
+    // Set up global variables for Brevo
+    (window as any).REQUIRED_CODE_ERROR_MESSAGE =
+      "Please choose a country code";
+    (window as any).LOCALE = "en";
+    (window as any).EMAIL_INVALID_MESSAGE = (
+      window as any
+    ).SMS_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    (window as any).REQUIRED_ERROR_MESSAGE =
+      "This field cannot be left blank. ";
+    (window as any).GENERIC_INVALID_MESSAGE =
+      "The information provided is invalid. Please review the field format and try again.";
+    (window as any).translation = {
+      common: {
+        selectedList: "{quantity} list selected",
+        selectedLists: "{quantity} lists selected",
+        selectedOption: "{quantity} selected",
+        selectedOptions: "{quantity} selected",
+      },
+    };
+    (window as any).AUTOHIDE = Boolean(0);
+
+    return () => {
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setShowError(false);
+    setShowSuccess(false);
+
+    // Validate email field is not empty
+    if (!email.trim()) {
+      setShowError(true);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("EMAIL", email);
+      formData.append("email_address_check", "");
+      formData.append("locale", "en");
+
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setShowSuccess(true);
+        setEmail("");
+      } else {
+        setShowError(true);
+      }
+    } catch (error) {
+      setShowError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <>
+      {/* Brevo Form Styles */}
+      <style jsx>{`
+        @font-face {
+          font-display: block;
+          font-family: Roboto;
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2)
+              format("woff2"),
+            url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff)
+              format("woff");
+        }
+
+        @font-face {
+          font-display: fallback;
+          font-family: Roboto;
+          font-weight: 600;
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2)
+              format("woff2"),
+            url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff)
+              format("woff");
+        }
+
+        @font-face {
+          font-display: fallback;
+          font-family: Roboto;
+          font-weight: 700;
+          src:
+            url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2)
+              format("woff2"),
+            url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff)
+              format("woff");
+        }
+
+        #sib-container input:-ms-input-placeholder {
+          text-align: left;
+          font-family: Helvetica, sans-serif;
+          color: #c0ccda;
+        }
+
+        #sib-container input::placeholder {
+          text-align: left;
+          font-family: Helvetica, sans-serif;
+          color: #c0ccda;
+        }
+
+        #sib-container a {
+          text-decoration: underline;
+          color: #2bb2fc;
+        }
+
+        .sib-form-message-panel {
+          font-size: 16px;
+          text-align: left;
+          font-family: Helvetica, sans-serif;
+          border-radius: 8px;
+          max-width: 540px;
+          margin: 0 auto 16px;
+          padding: 12px;
+          display: none;
+        }
+
+        .sib-form-message-panel.show {
+          display: block;
+        }
+
+        .sib-form-message-panel.error {
+          color: #661d1d;
+          background-color: #ffeded;
+          border: 1px solid #ff4949;
+        }
+
+        .sib-form-message-panel.success {
+          color: #085229;
+          background-color: #e7faf0;
+          border: 1px solid #13ce66;
+        }
+
+        .sib-icon {
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+
+        .sib-form-message-panel__text {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      `}</style>
+
+      <div className="text-center  px-5 py-4">
+        <div className="px-5 py-4">
+          <div>
+            <p className="font-light text-balance text-sm">
+              If you&apos;d like to stay in the loop about music, experiments,
+              <br></br>
+              events, and the occasional heartfelt ramble, just enter your email
+              below…
+            </p>
+            <p className="mt-4">
+              <span style={{ fontFamily: "Immi, sans-serif" }}>Xx Imogen</span>
+            </p>
+          </div>
+          <div className="pt-2">
+            <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
+              <Input
+                type="email"
+                id="EMAIL"
+                name="EMAIL"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                labelPlacement="outside"
+                variant="bordered"
+                classNames={{
+                  input: "text-[#FF00A4]",
+                  inputWrapper:
+                    "border-zinc-300 border-1 hover:border-zinc-500 focus-within:border-pink-400 max-w-md mx-auto",
+                  label: "text-zinc-300 font-medium",
+                }}
+                required
+                data-required="true"
+                autoComplete="off"
+              />
+              <Button
+                type="submit"
+                color="secondary"
+                variant="flat"
+                isLoading={isLoading}
+                className="mx-auto bg-secondary text-white"
+              >
+                {isLoading ? "SUBSCRIBING..." : "SUBSCRIBE TO NEWSLETTER"}
+              </Button>
+              {/* Hidden Brevo fields */}
+              <input
+                type="text"
+                name="email_address_check"
+                value=""
+                className="hidden"
+              />
+              <input type="hidden" name="locale" value="en" />
+            </form>
+            {showError && (
+              <div className="w-full text-center text-sm mt-2 text-[#FF00A4]">
+                <span>
+                  Your subscription couldn&apos;t be saved. Please try again.
+                </span>
+              </div>
+            )}
+            {showSuccess && (
+              <div className="w-full text-center text-sm mt-2 text-[#D0E321]">
+                <span>Your subscription has been successful.</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="41px" height="34px" viewBox="0 0 41 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-421, -817)">
+            <g id="Group" transform="translate(421, 817)">
+                <ellipse id="Oval" fill="#A30069" cx="29" cy="31" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#A30069" cx="21" cy="29" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#B80076" fill="#D9008C" cx="21" cy="17" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" stroke="#FF00A4" fill="#D9008C" cx="25" cy="3" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#FF00A4" cx="10" cy="6" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#FF00A4" fill="#D9008C" cx="17" cy="3" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#FF00A4" cx="32" cy="6" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#FF00A4" cx="37" cy="11" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#FF00A4" cx="4" cy="10" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#B80076" fill="#D9008C" cx="29" cy="18" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#A30069" cx="35" cy="22" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" stroke="#B80076" fill="#D9008C" cx="13" cy="18" rx="3.5" ry="2.5"></ellipse>
+                <ellipse id="Oval" fill="#A30069" cx="7" cy="22" rx="4" ry="3"></ellipse>
+                <ellipse id="Oval" fill="#A30069" cx="13" cy="31" rx="4" ry="3"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
