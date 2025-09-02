@@ -3,10 +3,7 @@
 import React from "react";
 import MediaRequestForm from "./components/MediaRequestForm";
 import {
-  Textarea,
   Link,
-  Checkbox,
-  Input,
   Modal,
   ModalContent,
   ModalHeader,
@@ -420,7 +417,13 @@ const Footer = () => {
                       </p>
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-sm">Media & Press</h3>
+                      <h3 className="font-semibold text-sm">US Press</h3>
+                      <p className="text-sm font-extralight">
+                        sarah.avrin@charmschoolmedia.com
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm">Worldwide Press</h3>
                       <Link
                         className="underline text-sm font-extralight text-foreground decoration-dotted underline-offset-6 hover:decoration-solid cursor-pointer"
                         onPress={() => {
@@ -428,7 +431,7 @@ const Footer = () => {
                           onMediaModalOpen();
                         }}
                       >
-                        Open request Form
+                        Send media request
                       </Link>
                     </div>
                     <div className="space-y-2">

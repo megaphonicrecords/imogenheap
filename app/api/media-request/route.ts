@@ -1,19 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const MEDIA_EMAIL_DEFAULT = "jacob@imogenheap.com";
-const MEDIA_EMAIL_US = "jacob@imogenheap.com";
-
-function isUSCountry(countryRaw: string | null | undefined): boolean {
-  if (!countryRaw) return false;
-  const country = countryRaw.trim().toLowerCase();
-  return (
-    country === "us" ||
-    country === "usa" ||
-    country.includes("united states") ||
-    country.includes("u.s.")
-  );
-}
+const MEDIA_EMAIL_DEFAULT =
+  process.env.MEDIA_EMAIL_TO || "jacob@imogenheap.com";
+const MEDIA_FROM_EMAIL =
+  process.env.MEDIA_EMAIL_FROM || "onboarding@resend.dev";
 
 function buildEmailHtml(form: Record<string, string>): string {
   const get = (k: string) => (form[k] ? form[k] : "—");
@@ -89,9 +80,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const toEmail = isUSCountry(form["country"])
-      ? MEDIA_EMAIL_US
-      : MEDIA_EMAIL_DEFAULT;
+    const toEmail = MEDIA_EMAIL_DEFAULT;
     const resendApiKey = process.env.RESEND_API_KEY;
     if (!resendApiKey) {
       console.error("RESEND_API_KEY is not set.");
@@ -108,7 +97,7 @@ export async function POST(request: NextRequest) {
     const html = buildEmailHtml(form);
 
     await resend.emails.send({
-      from: "ImogenHeap Site <no-reply@imogenheap.com>",
+      from: `ImogenHeap Site <${MEDIA_FROM_EMAIL}>`,
       to: [toEmail],
       subject,
       html,
