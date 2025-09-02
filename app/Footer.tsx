@@ -431,7 +431,7 @@ const Footer = () => {
                           onMediaModalOpen();
                         }}
                       >
-                        Send media request
+                        Send interview request
                       </Link>
                     </div>
                     <div className="space-y-2">

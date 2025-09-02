@@ -356,7 +356,12 @@ export default function MediaRequestForm({
       </section>
 
       <div className="flex items-center gap-4 pt-2">
-        <Button type="submit" disabled={submitState === "submitting"}>
+        <Button
+          type="submit"
+          className="rounded-xl transition-all duration-300"
+          variant="flat"
+          disabled={submitState === "submitting"}
+        >
           {submitState === "submitting" ? "Submitting..." : "Submit Request"}
         </Button>
         {submitState === "success" && (
